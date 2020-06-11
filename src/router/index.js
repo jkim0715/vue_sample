@@ -2,6 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
+import LoginView from '@/views/Accounts/LoginView.vue'
+import SignupView from '@/views/Accounts/SignupView.vue'
+import AccountDetail from '@/views/Accounts/AccountDetail.vue'
+
+import Movielist from '@/views/Movie/Movielist.vue'
+import MovieRecommend from '@/views/Movie/MovieRecommend.vue'
+import CheckBoxoffice from '@/views/Movie/CheckBoxoffice.vue'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -11,13 +19,36 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/accounts/login',
+    name : 'login',
+    component : LoginView
+  },
+  {
+    path: '/accounts/signup',
+    name : 'signup',
+    component: SignupView
+  },
+  {
+    path: '/accounts/detail',
+    name: 'detail',
+    component : AccountDetail
+  },
+  {
+    path : '/movielist',
+    name: 'movielist',
+    component : Movielist
+  },
+  {
+    path : '/movierecommendation',
+    name : 'recommend',
+    component : MovieRecommend
+  },
+  {
+    path : '/checkboxoffice',
+    name : 'boxoffice',
+    component : CheckBoxoffice
+  },
+
 ]
 
 const router = new VueRouter({
