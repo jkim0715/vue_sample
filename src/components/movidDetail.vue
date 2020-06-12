@@ -1,6 +1,6 @@
 <template>
   <div>
-     <button type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
+     <button @click="movieDetail" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
         영화정보 상세보기 
     </button>
 
@@ -17,7 +17,8 @@
                 <div class="modal-body">
                     <img :src='backdrop_URL' class="card-img-top" alt="대체 텍스트">
                     <hr>
-                    <button type="button" class="btn btn-success">{{movie.user_rating}} </button>
+                    <button v-for="genre in movie.genres" :key="genre">{{genre}}</button>
+                    <button type="button" class="btn btn-success">{{movie.vote_average}} </button>
                     <br>
                     <br>
 
@@ -34,14 +35,24 @@
 </template>
 
 <script>
+import axios from 'axios'
+const SERVER_URL = 'http://127.0.0.1:8000/movies/'
+
+
 export default {
     name:'movieDetail',
+    data(){
+        return{
+            movie:[]
+        }
+    },
     props:{
-        movie:Object,
+        box:Object,
     },
     computed:{
       backdrop_URL(){
-        return this.movie.backdrop_url
+        const IMGURL='https://image.tmdb.org/t/p/original'
+        return IMGURL+this.movie.backdrop_path
       },
       movieID_1(){
           return `#Modal${this.movie.id}`
@@ -49,6 +60,16 @@ export default {
       movieID_2(){
           return `Modal${this.movie.id}`
       }
+    },
+    methods:{
+        movieDetail(){
+            axios.get(SERVER_URL+this.box.movieNm+'/')
+            .then(res=> {
+                this.movie = res.data
+                console.log(res.data)
+            })
+            .catch(err=> console.log(err.response.data))
+        },
     }
 }
 
