@@ -28,11 +28,7 @@
       
       
       
-      <!-- <ul>
-          <li v-for="boxoffice in boxoffices" :key="boxoffice.rnum">
-              {{boxoffice.movieNm}}
-          </li>
-      </ul> -->
+      
   </div>
 </template>
 
@@ -71,6 +67,9 @@ export default {
         })
         .catch(err=>console.log(err))
     },
+    methods:{
+
+    }
 
 }
 </script>
