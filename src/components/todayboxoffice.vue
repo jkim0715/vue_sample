@@ -18,7 +18,7 @@
             <td> {{boxoffice.movieNm}}</td>
             <td> {{boxoffice.rankInten}}</td>
             <td> {{boxoffice.rankOldAndNew}}</td>
-            <td> 클릭</td>
+            <td> <button type="submit" class= 'btn-btn-primary' @click.prevent="mvdetail(boxoffice)">클릭</button></td>
           </tr>
         </tbody>
         </table>
@@ -68,7 +68,9 @@ export default {
         .catch(err=>console.log(err))
     },
     methods:{
-
+        mvdetail(box){
+            this.$emit('submit-box-data',box)
+        }
     }
 
 }
