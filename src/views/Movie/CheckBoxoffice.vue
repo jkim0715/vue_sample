@@ -18,7 +18,7 @@
             <th scope="row">{{boxoffice.rank}}</th>
             <td> {{boxoffice.movieNm}}</td>
             <td> {{boxoffice.audiAcc}}</td>
-            <td> <button type="submit" class= 'btn-btn-primary' @click.prevent="mvdetail(boxoffice)">클릭</button></td>
+            <td> <movieDetail :movie="boxoffice" type="button" class= 'btn-btn-primary' /></td>
           </tr>
         </tbody>
         </table>
@@ -30,12 +30,17 @@
 
 <script>
 import axios from 'axios'
+import movieDetail from '../../components/movidDetail.vue'
+
 const API_URL='http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key='
 const Key = 'd93a43233a59ba9e241e833c89126e87'
 
 
 export default {
     name : 'CheckBoxoffice',
+    components:{
+      movieDetail
+    },
     data(){
       return{
         date:null,
