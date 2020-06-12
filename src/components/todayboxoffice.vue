@@ -1,11 +1,38 @@
 <template>
   <div>
       오늘의 박스 오피스 들어올곳
-      <ul>
+      <div class="row">
+        <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">순위</th>
+            <th scope="col">제목</th>
+            <th scope="col">순위 변동</th>
+            <th scope="col">신규진입</th>
+            <th scope="col">자세히</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="boxoffice in boxoffices" :key="boxoffice.rnum">
+            <th scope="row">{{boxoffice.rank}}</th>
+            <td> {{boxoffice.movieNm}}</td>
+            <td> {{boxoffice.rankInten}}</td>
+            <td> {{boxoffice.rankOldAndNew}}</td>
+            <td> 클릭</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+      
+      
+      
+      
+      
+      <!-- <ul>
           <li v-for="boxoffice in boxoffices" :key="boxoffice.rnum">
               {{boxoffice.movieNm}}
           </li>
-      </ul>
+      </ul> -->
   </div>
 </template>
 
@@ -40,7 +67,7 @@ export default {
         .then(res=> {
             // console.log(res.data.boxOfficeResult.dailyBoxOfficeList)
             this.boxoffices = res.data.boxOfficeResult.dailyBoxOfficeList
-            console.log(this.boxoffice)
+            
         })
         .catch(err=>console.log(err))
     },

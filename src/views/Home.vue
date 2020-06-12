@@ -1,10 +1,10 @@
 <template>
   <div class="row">
-    <div class = 'col-sm-12 col-md-3'>
+    <div class = 'col-sm-12 col-md-6'>
       boxofficetable
       <todayboxoffice />
     </div>
-    <div class = 'col-sm-12 col-md-9'>
+    <div class = 'col-sm-12 col-md-6'>
       상세정보 페이지
     </div>
   </div>
