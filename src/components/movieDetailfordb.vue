@@ -1,5 +1,5 @@
 <template>
-  <div>
+    <div>
      <button @click="movieDetail" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
         영화정보 상세보기 
     </button>
@@ -17,13 +17,13 @@
                 <div class="modal-body">
                     <img :src='backdrop_URL' class="card-img-top" alt="대체 텍스트">
                     <hr>
-                    <button v-for="genre in movie.genres" :key="genre">{{genre}}</button>
+                    <button v-for="genre in movie_db.genres" :key="genre">{{genre}}</button>
                     <br>
                     <button type="button" class="btn btn-success">{{movie.vote_average}} </button>
                     <br>
                     <br>
 
-                    {{movie.overview}}
+                    {{movie_db.overview}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -37,18 +37,17 @@
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/movies/'
-
+const SERVER_URL = 'http://127.0.0.1:8000/movies/detail/'
 
 export default {
-    name:'movieDetail',
+    name:'movieDetailfordb',
     data(){
         return{
-            movie:[]
+            movie_db:[]
         }
     },
     props:{
-        box:Object,
+        movie:Object
     },
     computed:{
       backdrop_URL(){
@@ -64,18 +63,17 @@ export default {
     },
     methods:{
         movieDetail(){
-            axios.get(SERVER_URL+this.box.movieNm+'/')
-            .then(res=> {
-                this.movie = res.data
-                console.log(res.data)
-                console.log(this.box.movieNm)
-
+            console.log(SERVER_URL+this.movie.id+'/')
+            axios.get(SERVER_URL+this.movie.id+'/')
+            .then(res=>{
+                this.movie_db=res.data
             })
-            .catch(err=> console.log(err.response.data))
-        },
+            .catch(err => console.log(err.response.data))
+        }
     }
-}
 
+
+}
 </script>
 
 <style>
