@@ -6,7 +6,12 @@
       <button @click="up();receive()"> next</button>
     </div>
   <!-- 여기부터 장르 라디오 버튼 ?  -->
-
+    <div class="form-check form-check-inline" v-for="genre in genres" :key='genre.id'>
+      <input class="form-check-input" type="radio" name="exampleRadios" :id="genre.name" value="option1" >
+      <label class="form-check-label" :for="genre.name">
+        {{genre.name}}
+      </label>
+    </div>
 
 
     <div class='card col-lg-4'  v-for='movie in movies.results' :key="movie.id">
@@ -31,16 +36,16 @@ export default {
       return{
         movies:[],
         page: 1,
-        genre:null
+        genres:null
         
       }
     },
     created(){
       this.receive()
-      // ,axios.get(SERVER_URL+'genre/')
-      // .then(res => {this.genre = res.data
-      // console.log(res)})
-      // .catch(err=> console.log(err))
+      ,axios.get(SERVER_URL+'genre/')
+      .then(res => {this.genres = res.data
+      console.log(res)})
+      .catch(err=> console.log(err))
     },
       
     methods:{

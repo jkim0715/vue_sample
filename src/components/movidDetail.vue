@@ -15,7 +15,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img :src='backdrop_URL' class="card-img-top" alt="대체 텍스트">
+                    <img :src='backdrop_URL' class="card-img-top" alt="서버 로딩중 ">
                     <hr>
                     <button v-for="genre in movie.genres" :key="genre">{{genre}}</button>
                     <br>
@@ -37,7 +37,7 @@
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/movies/'
+const SERVER_URL = 'http://127.0.0.1:8000/movies/searchmovie/'
 
 
 export default {
