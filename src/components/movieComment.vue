@@ -35,7 +35,14 @@ export default {
             }
         axios.post('http://127.0.0.1:8000/movies/moviecomment/'+this.movie_id+'/create',this.commentData,config)
         .then(res => {
-            console.log(res.data)
+            this.comments.push({id:this.comments.length,
+                movie:this.comments[0].movie,
+                rate: this.commentData.rate,
+                title: this.commentData.title,
+                user: res.data.user
+            })
+            this.commentData.title =null
+            this.commentData.rate = 0
         })
         .catch(err => console.log(err.response.data))
 

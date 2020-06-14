@@ -82,7 +82,8 @@ export default {
         .then(res=> {
             this.comments = res.data
         })
-    }
+    },
+        
 
     }
 }
