@@ -10,6 +10,8 @@ import Movielist from '@/views/Movie/Movielist.vue'
 import MovieRecommend from '@/views/Movie/MovieRecommend.vue'
 import CheckBoxoffice from '@/views/Movie/CheckBoxoffice.vue'
 
+import Board from '@/views/Board.vue'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -48,6 +50,11 @@ Vue.use(VueRouter)
     name : 'boxoffice',
     component : CheckBoxoffice
   },
+  {
+    path : '/board',
+    name: 'board',
+    component : Board
+  }
 
 ]
 

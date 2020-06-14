@@ -4,8 +4,11 @@
       <button @click="down(); receive()" > previous</button>
       <input type="number" v-model="page" @keypress.enter="receive">
       <button @click="up();receive()"> next</button>
-      
     </div>
+  <!-- 여기부터 장르 라디오 버튼 ?  -->
+
+
+
     <div class='card col-lg-4'  v-for='movie in movies.results' :key="movie.id">
       
       <movieListDetail :movie='movie' />
@@ -28,11 +31,16 @@ export default {
       return{
         movies:[],
         page: 1,
+        genre:null
         
       }
     },
     created(){
       this.receive()
+      // ,axios.get(SERVER_URL+'genre/')
+      // .then(res => {this.genre = res.data
+      // console.log(res)})
+      // .catch(err=> console.log(err))
     },
       
     methods:{

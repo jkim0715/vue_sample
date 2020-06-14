@@ -60,7 +60,8 @@ export default {
       },
       movieID_2(){
           return `Modal${this.movie.id}`
-      }
+      },
+      
     },
     methods:{
         movieDetail(){
@@ -71,7 +72,9 @@ export default {
                 console.log(this.box.movieNm)
 
             })
-            .catch(err=> console.log(err.response.data))
+            .catch(this.movie = {
+                overview:'서버에러 잡시 후에 시도해주세요'
+            })
         },
     }
 }

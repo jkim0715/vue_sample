@@ -8,6 +8,7 @@
       <router-link :to="{name:'detail'}">detail</router-link> |
       <router-link :to="{name:'movielist'}">movielist</router-link> |
       <router-link :to="{name:'boxoffice'}">boxoffice</router-link> |
+      <router-link :to="{name:'board'}">board</router-link> |
       <router-link :to="{name:'recommend'}">recommend</router-link> |
     </div>
     

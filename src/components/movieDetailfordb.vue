@@ -1,6 +1,6 @@
 <template>
     <div>
-     <button @click="movieDetail" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
+     <button @click="movieDetail();commentDetail()" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
         영화정보 상세보기 
     </button>
 
@@ -25,6 +25,7 @@
 
                     {{movie_db.overview}}
                 </div>
+                <movieComment :comments ="comments" :movie_id="movie.id" />
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
@@ -37,14 +38,19 @@
 
 <script>
 import axios from 'axios'
+import movieComment from './movieComment.vue'
 const SERVER_URL = 'http://127.0.0.1:8000/movies/detail/'
 
 export default {
     name:'movieDetailfordb',
     data(){
         return{
-            movie_db:[]
+            movie_db : [],
+            comments : null,
         }
+    },
+    components:{
+        movieComment
     },
     props:{
         movie:Object
@@ -69,10 +75,16 @@ export default {
                 this.movie_db=res.data
             })
             .catch(err => console.log(err.response.data))
-        }
+        },
+        // 코멘트 받아오는 api 
+        commentDetail(){
+        axios.get('http://127.0.0.1:8000/movies/moviecomment/'+this.movie.id+'/')
+        .then(res=> {
+            this.comments = res.data
+        })
     }
 
-
+    }
 }
 </script>
 

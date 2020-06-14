@@ -41,10 +41,16 @@ const Key = 'd93a43233a59ba9e241e833c89126e87'
 
 
 let today = new Date();   
+today.setDate(today.getDate()-1);
 const year = today.getFullYear(); // 년도
 const month = ("0" + (today.getMonth() + 1)).slice(-2);  // 월
-const date =("0" + (today.getDate() -1 )).slice(-2);  // 날짜
+const date =("0" + (today.getDate()  )).slice(-2);  // 날짜
 // 이거 1일 되면 어케 될지 모름 수정해야댐 
+
+
+
+
+
 
 
 
@@ -61,7 +67,7 @@ export default {
     created(){
         axios.get(API_URL+Key+'&targetDt='+year+month+date)
         .then(res=> {
-            // console.log(res.data.boxOfficeResult.dailyBoxOfficeList)
+            console.log(res.data.boxOfficeResult.dailyBoxOfficeList)
             this.boxoffices = res.data.boxOfficeResult.dailyBoxOfficeList
             
         })
