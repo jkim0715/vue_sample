@@ -17,7 +17,6 @@
 
 
     <div class='card col-lg-4'  v-for='movie in movies.results' :key="movie.id">
-      
       <movieListDetail :movie='movie' />
     </div>
   </div>
@@ -60,7 +59,7 @@ export default {
       receive(){
         axios.get(SERVER_URL+'?page='+this.page)
         .then(res=> {this.movies = res.data
-          console.log(res)
+          // console.log(res)
         })
         .catch(err=> console.log(err))
       },
@@ -71,8 +70,9 @@ export default {
         this.page = (this.page)*1-1
       },
       sendgenre(){
-        // console.log(SERVER_URL+'searchmovies/genres',this.selectgenres)
-        axios.get(SERVER_URL+'searchmovies/genres',this.selectgenres)
+        // console.log(SERVER_URL+'searchmovies/genres',this.selectg)
+
+        axios.get(SERVER_URL+'searchmovies/genres',{params: this.selectg})
         .then(res => console.log(res))
         .catch(err => console.log(err.response.data))
       }
