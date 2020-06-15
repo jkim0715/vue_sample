@@ -17,7 +17,6 @@
 
 
     <div class='card col-lg-4'  v-for='movie in movies.results' :key="movie.id">
-      
       <movieListDetail :movie='movie' />
     </div>
   </div>
