@@ -3,7 +3,7 @@
     <img :src="backdrop_URL" class="card-img-top" alt="대체 텍스트">
     <h5 class="card-title">{{movie.title}}</h5>
     <p>평점: {{movie.vote_average}}</p>
-    <td> <movieDetailfordb :movie="movie" type="button" class= 'btn-btn-primary' /></td>
+    <td> <movieDetailfordb :movie="movie" :genres_all='genres' type="button" class= 'btn-btn-primary' /></td>
   </div>
 </template>
 
@@ -15,7 +15,8 @@ export default {
       movieDetailfordb
     },
     props:{
-      movie:Object
+      movie:Object,
+      genres:Object
     },
     computed:{
       backdrop_URL(){

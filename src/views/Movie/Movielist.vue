@@ -18,7 +18,7 @@
 
     <div class='card col-lg-4'  v-for='movie in movies.results' :key="movie.id">
       
-      <movieListDetail :movie='movie' />
+      <movieListDetail :movie='movie' :genres='genres' />
     </div>
   </div>
 </template>
@@ -71,7 +71,7 @@ export default {
         this.page = (this.page)*1-1
       },
       sendgenre(){
-        // console.log(SERVER_URL+'searchmovies/genres',this.selectgenres)
+        console.log(SERVER_URL+'searchmovies/genres',this.selectgenres)
         axios.get(SERVER_URL+'searchmovies/genres',this.selectgenres)
         .then(res => console.log(res))
         .catch(err => console.log(err.response.data))
