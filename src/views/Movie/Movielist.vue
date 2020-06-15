@@ -12,14 +12,14 @@
         {{genre.name}}
       </label>
     </div>
-      <button type='submit' @click.prevent="sendgenre"> 제출 </button>
+      <button type='submit' @click="sendgenre"> 제출 </button>
     <br>
 
 
     <div class='card col-lg-4'  v-for='movie in movies.results' :key="movie.id">
 
       
-      <movieListDetail :movie='movie' :genres='genres' />
+      
 
       <movieListDetail :movie='movie' />
 
@@ -53,13 +53,7 @@ export default {
       console.log(res)})
       .catch(err=> console.log(err))
     },
-    computed:{
-      selectgenres(){
-        return {data:this.selectg}
-      }
-
-    }
-    ,
+    
     methods:{
       receive(){
         axios.get(SERVER_URL+'?page='+this.page)
@@ -81,7 +75,9 @@ export default {
 
         axios.get(SERVER_URL+'searchmovies/genres',{params: this.selectg})
 
-        .then(res => console.log(res))
+        .then(res => {console.log(res)
+        this.movies = res.data
+        })
         .catch(err => console.log(err.response.data))
       }
     }
