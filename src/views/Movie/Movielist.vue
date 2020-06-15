@@ -6,12 +6,14 @@
       <button @click="up();receive()"> next</button>
     </div>
   <!-- 여기부터 장르 라디오 버튼 ?  -->
-    <div class="form-check form-check-inline" v-for="genre in genres" :key='genre.id'>
-      <input class="form-check-input" type="radio" name="exampleRadios" :id="genre.name" value="option1" >
+    <div class="form-check form-check-inline" v-for="genre in genres" :key='genre.name'>
+      <input class="form-check-input" type="checkbox" name="exampleRadios" :id="genre.name" :value="genre.id" v-model="selectg" >
       <label class="form-check-label" :for="genre.name">
         {{genre.name}}
       </label>
     </div>
+      <button type='submit' @click.prevent="sendgenre"> 제출 </button>
+    <br>
 
 
     <div class='card col-lg-4'  v-for='movie in movies.results' :key="movie.id">
@@ -36,8 +38,8 @@ export default {
       return{
         movies:[],
         page: 1,
-        genres:null
-        
+        genres:null,
+        selectg:[]
       }
     },
     created(){
@@ -61,6 +63,12 @@ export default {
       },
       down(){
         this.page = (this.page)*1-1
+      },
+      sendgenre(){
+        console.log(SERVER_URL+'searchmovie/genres',this.selectg)
+        axios.get(SERVER_URL+'searchmovie/genres',this.selectg)
+        .then(res => console.log(res))
+        .catch(err => console.log(err.response.data))
       }
     }
 }
