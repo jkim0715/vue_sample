@@ -1,7 +1,7 @@
 <template>
   <div>
-     <button @click="movieDetail()" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
-        영화정보 상세보기 
+     <button @click="movieDetail()"  type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
+        영화정보 상세보기
     </button>
 
         <!-- Modal -->
@@ -47,6 +47,7 @@ export default {
         return{
             movie:[],
             comments :[] ,
+            genres:{},
         }
     },
     components:{
@@ -73,22 +74,37 @@ export default {
     },
     methods:{
         movieDetail(){
-            axios.get(SERVER_URL+this.box.movieNm+'/')
+        const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+            }
+        } 
+        axios.get(SERVER_URL+this.box.movieNm+'/')
+        .then(res=> {
+            this.movie = res.data
+            axios.get('http://127.0.0.1:8000/movies/moviecomment/'+this.movie.id+'/')
             .then(res=> {
-                this.movie = res.data
-                axios.get('http://127.0.0.1:8000/movies/moviecomment/'+this.movie.id+'/')
-                .then(res=> {
-                this.comments = res.data
+            this.comments = res.data
+            })
         })
-                
+        .catch(this.movie = {
+            overview:'서버에러 잡시 후에 시도해주세요'
+        })
 
+        axios.get('http://localhost:8000/movies/genre/',null, config)
+        .then(res=>{
+            console.log(res.data)
+            console.log('hjoihi')
+            res.data.forEach(item=>{
+            this.genres[`${item.id}`] = item.name
             })
-            .catch(this.movie = {
-                overview:'서버에러 잡시 후에 시도해주세요'
-            })
+        .then(()=>{
+            console.log(this.genres)
+                })
+            }) 
         },
         
-}
+    },
 }
 
 </script>

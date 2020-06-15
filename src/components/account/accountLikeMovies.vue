@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h1>Detail!!</h1>
+      <span>{{movie.title}}</span>
   </div>
 </template>
 
 <script>
 export default {
-    name:'articleDetail',
+    name:'accountLikeMovies',
     props:{
-        article: Object
+        movie: Object,
     }
 }
 </script>
