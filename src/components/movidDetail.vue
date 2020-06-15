@@ -1,6 +1,6 @@
 <template>
   <div>
-     <button @click="movieDetail" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
+     <button @click="movieDetail()" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
         영화정보 상세보기 
     </button>
 
@@ -25,6 +25,7 @@
 
                     {{movie.overview}}
                 </div>
+                <movieComment :comments ="comments" :movie_id="movie.id" />
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
@@ -38,14 +39,18 @@
 <script>
 import axios from 'axios'
 const SERVER_URL = 'http://127.0.0.1:8000/movies/searchmovie/'
-
+import movieComment from './movieComment.vue'
 
 export default {
     name:'movieDetail',
     data(){
         return{
-            movie:[]
+            movie:[],
+            comments :[] ,
         }
+    },
+    components:{
+        movieComment
     },
     props:{
         box:Object,
@@ -61,6 +66,9 @@ export default {
       movieID_2(){
           return `Modal${this.movie.id}`
       },
+      Commenturl(){
+          return `http://127.0.0.1:8000/movies/moviecomment/${this.movie.id}/`
+      }
       
     },
     methods:{
@@ -68,15 +76,19 @@ export default {
             axios.get(SERVER_URL+this.box.movieNm+'/')
             .then(res=> {
                 this.movie = res.data
-                console.log(res.data)
-                console.log(this.box.movieNm)
+                axios.get('http://127.0.0.1:8000/movies/moviecomment/'+this.movie.id+'/')
+                .then(res=> {
+                this.comments = res.data
+        })
+                
 
             })
             .catch(this.movie = {
                 overview:'서버에러 잡시 후에 시도해주세요'
             })
         },
-    }
+        
+}
 }
 
 </script>
