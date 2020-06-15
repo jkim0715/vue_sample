@@ -44,7 +44,7 @@ export default {
             console.log(res.data)
             this.comments.push({
                 id:null,
-                movie:this.comments[0].movie,
+                movie:this.movie_id,
                 rate: this.commentData.rate,
                 title: this.commentData.title,
                 user: null

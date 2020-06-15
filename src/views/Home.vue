@@ -6,17 +6,16 @@
     </div>
     <div class = 'col-sm-12 col-md-6'>
       상세정보 페이지
-      <boxofficedetail :box='boxdata' :movie='movies' />
+      <boxofficedetail v-if="movies" :box='boxdata' :movie='movies' />
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/movies/'
+const SERVER_URL = 'http://127.0.0.1:8000/movies/searchmovie/'
 import todayboxoffice from '@/components/todayboxoffice.vue'
 import boxofficedetail from '@/components/boxofficedetail.vue'
-
 export default {
   name: 'Home',
   components: {
@@ -31,11 +30,12 @@ export default {
   methods:{
     save_box(box){
       this.boxdata = box
-      axios.get(SERVER_URL+this.box.movieNm+'/')
+      console.log(this.boxdata)
+      axios.get(SERVER_URL+this.boxdata.movieNm+'/')
             .then(res=> {
+                console.log(res)
                 this.movies = res.data
-                console.log(this.box.movieNm)
-
+                // console.log(this.box.movieNm)
             })
             .catch(err=> console.log(err.response.data)) 
     }
