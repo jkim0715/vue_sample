@@ -48,7 +48,13 @@ export default {
       console.log(res)})
       .catch(err=> console.log(err))
     },
-      
+    computed:{
+      selectgenres(){
+        return {data:this.selectg}
+      }
+
+    }
+    ,
     methods:{
       receive(){
         axios.get(SERVER_URL+'?page='+this.page)
@@ -64,8 +70,8 @@ export default {
         this.page = (this.page)*1-1
       },
       sendgenre(){
-        console.log(SERVER_URL+'searchmovie/genres',this.selectg)
-        axios.get(SERVER_URL+'searchmovie/genres',this.selectg)
+        console.log(SERVER_URL+'searchmovie/genres',this.selectgenres)
+        axios.get(SERVER_URL+'searchmovie/genres',this.selectgenres)
         .then(res => console.log(res))
         .catch(err => console.log(err.response.data))
       }
