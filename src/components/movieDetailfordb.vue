@@ -27,6 +27,7 @@
                 </div>
                 <movieComment :comments ="comments" :movie_id="movie.id" />
                 <div class="modal-footer">
+                    <button type="button">좋아요</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -47,6 +48,7 @@ export default {
         return{
             movie_db : [],
             comments : null,
+            
         }
     },
     components:{
@@ -83,6 +85,17 @@ export default {
             this.comments = res.data
         })
     },
+        like(){
+            const config={
+                headers:{
+                Authorization: `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
+            axios.post('https://127.0.0.1:8000/movies/like/'+this.movie.id+'/',null,config)
+            .then(res => console.log(res))
+            .catch(err => console.log(err.response.data))
+
+        }
         
 
     }
