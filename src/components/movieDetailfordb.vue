@@ -1,7 +1,7 @@
 <template>
     <div>
-     <button @click="movieDetail();commentDetail()" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
-        영화정보 상세보기 
+     <button @click="movieDetail();commentDetail();genresToString()" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
+        영화정보 상세보기
     </button>
 
         <!-- Modal -->
@@ -17,7 +17,7 @@
                 <div class="modal-body">
                     <img :src='backdrop_URL' class="card-img-top" alt="대체 텍스트">
                     <hr>
-                    <button v-for="genre in movie_db.genres" :key="genre">{{genre}}</button>
+                    <button v-for="genre in movie_db.genres" :key="genre">{{genres[`${genre}`]}}</button>
                     <br>
                     <button type="button" class="btn btn-success">{{movie.vote_average}} </button>
                     <br>
@@ -48,7 +48,7 @@ export default {
         return{
             movie_db : [],
             comments : null,
-            
+            genres:{},
         }
     },
     components:{
@@ -96,6 +96,25 @@ export default {
             .then(res => console.log(res))
             .catch(err => console.log(err.response.data))
 
+        },
+        genresToString(){
+        const config = {
+            headers: {
+                Authorization: `Token ${this.$cookies.get('auth-token')}`
+            }
+        } 
+        axios.get('http://localhost:8000/movies/genre/',null, config)
+        .then(res=>{
+            console.log(res.data)
+            res.data.forEach(item=>{
+            console.log(item)
+            this.genres[`${item.id}`] = item.name
+                })
+            return this.genres
+            })
+        .then(data=>{
+            console.log(data)
+        })
         }
         
 
