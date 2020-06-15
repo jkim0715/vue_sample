@@ -10,7 +10,10 @@ import Movielist from '@/views/Movie/Movielist.vue'
 import MovieRecommend from '@/views/Movie/MovieRecommend.vue'
 import CheckBoxoffice from '@/views/Movie/CheckBoxoffice.vue'
 
-import Board from '@/views/Board.vue'
+import Board from '@/views/Board/Board.vue'
+import ArticleCreate from '@/views/Board/ArticleCreate.vue'
+import articleDetail from '@/views/Board/ArticleDetail.vue'
+
 
 Vue.use(VueRouter)
 
@@ -54,7 +57,17 @@ Vue.use(VueRouter)
     path : '/board',
     name: 'board',
     component : Board
-  }
+  },
+  {
+    path : '/articlecreate',
+    name: 'articlecreate',
+    component : ArticleCreate
+  },
+  {
+    path : '/articledetail',
+    name: 'articledetail',
+    component : articleDetail
+  },
 
 ]
 
