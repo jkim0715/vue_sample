@@ -1,28 +1,37 @@
 <template>
-  <div>
-    <!-- <h3>  {{movie.title}}</h3>
+  
   <div class="card" >
-    <img :src="backdrop_URL" class="card-img-top" alt="">
+    <img :src="poster_URL" class="card-img-top" alt="로딩중">
     <div class="card-body">
-        <h5 class="card-title">{{movie.title}}</h5>
-        <p class="card-text">{{movie.overview}}</p>
-        <p>개봉일 : {{box.openDt}}</p>
-        <p>누적관객 : {{box.audiAcc}}</p>
-        <a href="#" class="btn btn-primary">리뷰보기</a>
-    </div>
-  </div> -->
+      <p class="card-text">{{movie.overview}}</p>
   </div>
+</div>
 </template>
 
 <script>
 
-
 export default {
     name: 'boxofficedetail',
-        
+
+    props:{
+      box:Object,
+      movie:Object
+    },
+    data(){
+      return{
+        movies:null
+      }
+    },
+    computed:{
+      poster_URL(){
+        const IMGURL='https://image.tmdb.org/t/p/original'
+        return IMGURL+this.movie.poster_path
+      },
+    }
+      
+    
 }
 </script>
 
 <style>
-
 </style>

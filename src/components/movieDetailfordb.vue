@@ -47,7 +47,7 @@ export default {
     data(){
         return{
             movie_db : [],
-            comments : null,
+            comments : [],
             
         }
     },
@@ -85,6 +85,7 @@ export default {
         .then(res=> {
             this.comments = res.data
         })
+        .catch(err=> console.log(err.response))
     },
         like(){
             const config={

@@ -18,7 +18,7 @@
             <td> {{boxoffice.movieNm}}</td>
             <td> {{boxoffice.rankInten}}</td>
             <td> {{boxoffice.rankOldAndNew}}</td>
-            <td> <button type="submit" class= 'btn-btn-primary' @click.prevent="mvdetail(boxoffice)">클릭</button></td>
+            <td> <button type="submit" class= 'btn-btn-primary'  :box='boxoffice' @click.prevent="mvdetail(boxoffice)">클릭</button></td>
           </tr>
         </tbody>
         </table>
@@ -34,26 +34,14 @@
 
 <script>
 import axios from 'axios'
-
 const API_URL='http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key='
 const Key = 'd93a43233a59ba9e241e833c89126e87'
 // &targetDt=20120101
-
-
 let today = new Date();   
 today.setDate(today.getDate()-1);
 const year = today.getFullYear(); // 년도
 const month = ("0" + (today.getMonth() + 1)).slice(-2);  // 월
 const date =("0" + (today.getDate()  )).slice(-2);  // 날짜
-// 이거 1일 되면 어케 될지 모름 수정해야댐 
-
-
-
-
-
-
-
-
 
 
 
@@ -78,10 +66,8 @@ export default {
             this.$emit('submit-box-data',box)
         }
     }
-
 }
 </script>
 
 <style>
-
 </style>
