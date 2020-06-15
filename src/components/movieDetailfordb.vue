@@ -55,7 +55,8 @@ export default {
         movieComment
     },
     props:{
-        movie:Object
+        movie:Object,
+        genres_all:Object
     },
     computed:{
       backdrop_URL(){
