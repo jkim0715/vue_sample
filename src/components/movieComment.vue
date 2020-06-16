@@ -4,7 +4,7 @@
       <li v-for="comment in comments" :key="comment.id">
           {{comment.title}} 
           {{comment.rate}}점
-        <button v-if="comment.user.username===user">삭제</button>
+        <button v-if="comment.user.username===user" @click="deleteComment(comment.id)">삭제</button>
       </li>
       <div>
       <!-- <button @click="down(); receive()">이전 페이지</button>
@@ -42,8 +42,7 @@ export default {
                 }
             }
         axios.post('http://127.0.0.1:8000/movies/moviecomment/'+this.movie_id+'/create',this.commentData,config)
-        .then(res => {
-            console.log(res.data)
+        .then(( )=> {
             this.comments.push({
                 id:null,
                 movie:this.movie_id,
@@ -54,13 +53,16 @@ export default {
             this.commentData.title =null
             this.commentData.rate = 0
         })
-        .catch(err => console.log(err.response.data))
-
         },
-        delete(){
-
-        }
-        
+        deleteComment(commentId){
+            this.$emit('delete-comment',commentId)
+            // const config = {
+            //     headers: {
+            //     Authorization: `Token ${this.$cookies.get('auth-token')}`
+            //         }
+            // } 
+            // axios.post(`http://localhost:8000/movies/deletemoviecomment/${commentId}/`, null, config)
+        },
     }
    
         

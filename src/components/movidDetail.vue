@@ -17,7 +17,7 @@
                 <div class="modal-body">
                     <img :src='backdrop_URL' class="card-img-top" alt="서버 로딩중 ">
                     <hr>
-                    <button v-for="genre in movie.genres" :key="genre">{{genre}}</button>
+                    <button v-for="genre in movie.genres" :key="genre">{{genres[`${genre}`]}}</button>
                     <br>
                     <button type="button" class="btn btn-success">{{movie.vote_average}} </button>
                     <br>
@@ -25,7 +25,7 @@
 
                     {{movie.overview}}
                 </div>
-                <movieComment :comments ="comments" :movie_id="movie.id" />
+                <movieComment :comments ="comments" :movie_id="movie.id"  @delete-comment="deleteComment"/>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
@@ -81,6 +81,7 @@ export default {
         } 
         axios.get(SERVER_URL+this.box.movieNm+'/')
         .then(res=> {
+            console.log(res.data)
             this.movie = res.data
             axios.get('http://127.0.0.1:8000/movies/moviecomment/'+this.movie.id+'/')
             .then(res=> {
@@ -93,15 +94,23 @@ export default {
 
         axios.get('http://localhost:8000/movies/genre/',null, config)
         .then(res=>{
-            console.log(res.data)
-            console.log('hjoihi')
             res.data.forEach(item=>{
-            this.genres[`${item.id}`] = item.name
+                this.genres[`${item.id}`] = item.name
             })
-        .then(()=>{
-            console.log(this.genres)
-                })
-            }) 
+                console.log(this.genres)
+            })
+        },
+        deleteComment(commentId){
+            console.log('hihi')
+            const config = {
+                headers: {
+                Authorization: `Token ${this.$cookies.get('auth-token')}`
+                    }
+            } 
+            axios.post('http://localhost:8000/movies/deletemoviecomment/'+commentId+'/',null, config)
+            .then(res=>{
+                console.log(res.data)
+            })
         },
         
     },

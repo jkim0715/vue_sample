@@ -25,7 +25,7 @@
 
                     {{movie.overview}}
                 </div>
-                <movieComment :comments ="comments" :movie_id="movie.id" />
+                <movieComment :comments ="comments" :movie_id="movie.id"   @delete-comment="deleteComment"/>
                 <div class="modal-footer">
                     <button @click="like" type="button">좋아요</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -47,13 +47,8 @@ export default {
     data(){
         return{
             movie_db : [],
-
-            
             genres:{},
-
             comments : [],
-            
-
         }
     },
     components:{
@@ -121,7 +116,19 @@ export default {
         .then(data=>{
             console.log(data)
         })
-        }
+        },
+        deleteComment(commentId){
+            const config = {
+                headers: {
+                Authorization: `Token ${this.$cookies.get('auth-token')}`
+                    }
+            } 
+            axios.post('http://localhost:8000/movies/deletemoviecomment/'+commentId+'/',null, config)
+            .then(res=>{
+                console.log(res.data)
+                this.commentDetail()
+            })
+        },
         
 
     }

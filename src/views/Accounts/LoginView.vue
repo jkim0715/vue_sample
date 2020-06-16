@@ -1,6 +1,7 @@
 <template>
     <div>
       <h1>Login</h1>
+      <div class="row">
       <form>
         <div class="form-group">
             <label for="username">username </label>
@@ -15,6 +16,7 @@
             <button type='submit' class="btn btn-primary" @click.prevent="login">Login</button>
         </div>
       </form>
+      </div>
     </div>
 </template>
 

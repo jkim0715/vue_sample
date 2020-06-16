@@ -1,11 +1,12 @@
 <template>
   <div>
     <button @click="recommend1">알고1</button>
-    <div class="row">
-    <div class='card col-lg-4'  v-for='movie in movies' :key="movie.id">
-      <movieListDetail :movie='movie' />
+    <div v-if="movies.length !==0 " class="row">
+      <div class='card col-lg-4'  v-for='movie in movies' :key="movie.id">
+        <movieListDetail :movie='movie' />
+      </div>
     </div>
-    </div>
+    <div v-else-if="this.$cookies.get('auth-token')=== null"><p>로그인해주세요</p></div>
   </div>
 </template>
 

@@ -12,7 +12,9 @@
       <router-link :to="{name:'recommend'}">recommend</router-link> |
       <!-- <router-link :to="{name:'admin'}">admin</router-link> | -->
     </div>
+    <div class="container">
     <router-view @submit-login-data='login' @submit-signup-data='signup' />
+    </div>
     <!-- <admin /> -->
   </div>
 </template>
