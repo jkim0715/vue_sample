@@ -4,6 +4,7 @@
       <li v-for="comment in comments" :key="comment.id">
           {{comment.title}} 
           {{comment.rate}}점
+        <button v-show="comment.user.username===user">삭제</button>
       </li>
       <div>
       <!-- <button @click="down(); receive()">이전 페이지</button>
@@ -29,7 +30,8 @@ export default {
             commentData:{
                 title: null,
                 rate : 0
-            }
+            },
+            user: this.$cookies.get('username')
         }
     },
     methods :{
@@ -55,6 +57,9 @@ export default {
         .catch(err => console.log(err.response.data))
 
         },
+        delete(){
+            
+        }
         
     }
    

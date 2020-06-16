@@ -64,7 +64,7 @@ Vue.use(VueRouter)
     component : ArticleCreate
   },
   {
-    path : '/articledetail',
+    path : '/articledetail/',
     name: 'articledetail',
     component : articleDetail
   },
