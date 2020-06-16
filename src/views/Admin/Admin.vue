@@ -14,7 +14,7 @@
             <img :src='"https://image.tmdb.org/t/p/original"+movie.poster_path' class="card-img-top" alt="대체 텍스트">
             <h5 class="card-title">{{movie.title}}</h5>
             <p>평점: {{movie.vote_average}}</p>
-            <button @click='add(movie.id)' >추가하기</button>
+            <button @click.prevent='add(movie.id)' >추가하기</button>
         </div>
     </div>
 
@@ -57,8 +57,10 @@ export default {
             .then(res => {console.log(res)
             alert('추가 성공')
             })
-            .catch(
+            .catch(err=>{
+                console.log(err)
             alert('이미 존재합니다')
+            }
             )
         }
         

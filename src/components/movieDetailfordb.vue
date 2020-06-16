@@ -15,7 +15,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img :src='backdrop_URL' class="card-img-top" alt="대체 텍스트">
+                    <img :src='backdrop_URL' class="card-img-top" alt="이미지가 없습니다">
                     <hr>
                     <button v-for="genre in movie_db.genres" :key="genre">{{genres[`${genre}`]}}</button>
                     <br>
@@ -23,7 +23,7 @@
                     <br>
                     <br>
 
-                    {{movie_db.overview}}
+                    {{movie.overview}}
                 </div>
                 <movieComment :comments ="comments" :movie_id="movie.id" />
                 <div class="modal-footer">

@@ -1,6 +1,12 @@
 <template>
   <div class='row'>
     <div class="col-lg-12">
+      제목 : <input type="text" v-model="mvtitle" >
+      <button @click="send" @keyup.enter="send">검색</button>
+    </div>
+    
+    
+    <div class="col-lg-12">
       <button @click="down(); receive()" > previous</button>
       <input type="number" v-model="page" @keypress.enter="receive">
       <button @click="up();receive()"> next</button>
@@ -46,7 +52,8 @@ export default {
         movies:[],
         page: 1,
         genres:null,
-        selectg:[]
+        selectg:[],
+        mvtitle:null
       }
     },
     created(){
@@ -84,7 +91,13 @@ export default {
         }
 
         
-      }
+      },
+      send(){
+            axios.get('https://api.themoviedb.org/3/search/movie?api_key=4aa6196c39a63ef5473aa8c1e096c329&language=ko-K&query='+this.mvtitle+'&page='+this.page)
+            .then(res=> {this.movies = res.data
+            console.log(res)
+            })
+        },
     }
 }
 </script>
