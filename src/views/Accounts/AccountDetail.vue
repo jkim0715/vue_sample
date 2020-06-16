@@ -1,11 +1,14 @@
 <template>
   <div class ="row">
+    <div class="col-md-12" v-if="like_movies.length === 0">
+        <h1>좋아요를 눌러주세요</h1>
+    </div>
     <div class= "col-md-2">
-      <p v-for="genre in genre_lists_str" :key="genre">{{genre}}</p>
+      <p v-for="(genre,index) in genre_lists_str" :key="index">{{genre}}</p>
     </div>
     <div class="col-md-10">
       <div class="row">
-        <div class='card col-md-4'  v-for='movie in like_movies' :key="movie.id">
+        <div class='card col-md-4' v-for='movie in like_movies' :key="movie.id">
           <movieListDetail :movie='movie' />
         </div>
       </div>
@@ -74,7 +77,6 @@ export default {
         res.data.forEach(item=>{
           this.genre_lists[`${item.id}`] = item.name
         })
-
       })
     }
 }
