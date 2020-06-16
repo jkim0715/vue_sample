@@ -18,6 +18,11 @@ import admin from '@/views/Admin/Admin.vue'
 
 Vue.use(VueRouter)
 
+  // const articleDetail ={
+  //   template: '<div>articleDetail {{ $route.params.id}}</div>'
+  // }
+
+
   const routes = [
   {
     path: '/',
@@ -67,7 +72,8 @@ Vue.use(VueRouter)
   {
     path : '/articledetail',
     name: 'articledetail',
-    component : articleDetail
+    component : articleDetail,
+    props: true
   },
   {
     path: '/admin',

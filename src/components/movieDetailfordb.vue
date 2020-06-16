@@ -1,6 +1,6 @@
 <template>
     <div>
-     <button @click="movieDetail();commentDetail();genresToString()" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
+     <button @click="movieDetail();commentDetail();genresToString();add(movie.id)" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
         영화정보 상세보기
     </button>
 
@@ -121,6 +121,17 @@ export default {
         .then(data=>{
             console.log(data)
         })
+        },
+        add(id){
+            axios.get('http://127.0.0.1:8000/movies/add_movie/'+ id )
+            .then(res => {console.log(res)
+            // alert('추가 성공')
+            })
+            .catch(err=>{
+                console.log(err)
+            // alert('이미 존재합니다')
+            }
+            )
         }
         
 
