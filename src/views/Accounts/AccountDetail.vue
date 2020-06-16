@@ -1,22 +1,25 @@
 <template>
   <div class ="row">
-    <div class="col-md-6">
-      <accountLikeMoives v-for="movie in like_movies" :key="movie.id" :movie="movie" />
-    </div>
-    <div class= "col-md-6">
+    <div class= "col-md-2">
       <p v-for="genre in genre_lists_str" :key="genre">{{genre}}</p>
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class='card col-md-4'  v-for='movie in like_movies' :key="movie.id">
+          <movieListDetail :movie='movie' />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import accountLikeMoives from '@/components/account/accountLikeMovies'
-
+import movieListDetail from '../../components/movieListDetail.vue'
 import axios from 'axios'
 export default {
     name: 'AccountDetail',
     components:{
-      accountLikeMoives
+      movieListDetail
     },
     data() {
       return {
@@ -50,17 +53,28 @@ export default {
         this.like_movies = res.data
         this.genreCount()
       })
-      .then(()=>{
-        Object.keys(this.genre_count).forEach(genre=>{
-          console.log(genre)
-          this.genre_lists_str.push(this.genre_lists[`${genre}`])
+       .then(()=>{
+        var sortable = [];
+            for (var genre_id in this.genre_count) {
+                sortable.push([genre_id, this.genre_count[genre_id]]);
+            }
+            sortable.sort(function(a, b) {
+                return b[1] - a[1];
+            });
+        return sortable
         })
+      .then((data)=>{
+        console.log(data)
+        for(let i =0; i<data.length;i++){
+          this.genre_lists_str.push(this.genre_lists[`${data[i][0]}`] + `${data[i][1]}`)
+        }
       })
       axios.get('http://localhost:8000/movies/genre/',null, config)
       .then(res=>{
         res.data.forEach(item=>{
           this.genre_lists[`${item.id}`] = item.name
         })
+
       })
     }
 }
