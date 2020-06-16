@@ -10,9 +10,10 @@
       <router-link :to="{name:'boxoffice'}">boxoffice</router-link> |
       <router-link :to="{name:'board'}">board</router-link> |
       <router-link :to="{name:'recommend'}">recommend</router-link> |
+      <!-- <router-link :to="{name:'admin'}">admin</router-link> | -->
     </div>
-    
     <router-view @submit-login-data='login' @submit-signup-data='signup' />
+    <!-- <admin /> -->
   </div>
 </template>
 
@@ -22,6 +23,8 @@ const SERVER_URL = 'http://localhost:8000'
 
 export default {
   name: 'App',
+  components:{
+  },
   data() {
     return {
       isLoggedIn: false, 

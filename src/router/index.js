@@ -14,6 +14,7 @@ import Board from '@/views/Board/Board.vue'
 import ArticleCreate from '@/views/Board/ArticleCreate.vue'
 import articleDetail from '@/views/Board/ArticleDetail.vue'
 
+import admin from '@/views/Admin/Admin.vue'
 
 Vue.use(VueRouter)
 
@@ -64,10 +65,15 @@ Vue.use(VueRouter)
     component : ArticleCreate
   },
   {
-    path : '/articledetail/',
+    path : '/articledetail',
     name: 'articledetail',
     component : articleDetail
   },
+  {
+    path: '/admin',
+    name: 'admin',
+    component : admin
+  }
 
 ]
 
