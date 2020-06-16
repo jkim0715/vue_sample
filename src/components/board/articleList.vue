@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
    name:'articleList',
    props:{
@@ -21,15 +21,8 @@ export default {
    },
    methods:{
        deletearticle() {
-           const config={
-                headers:{
-                Authorization: `Token ${this.$cookies.get('auth-token')}`
-                }
-            }
-           axios.post('http://localhost:8000/reviews/delete/'+this.article.id+'/', null, config )
-           .then(res=> {
-               console.log(res)
-           })
+
+        this.$emit('delete-index-data',[this.article.id,this.index])
        }
    }
 }

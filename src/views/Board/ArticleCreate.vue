@@ -38,6 +38,7 @@ export default {
             axios.post('http://localhost:8000/reviews/create/', this.article, config)
             .then(res=> {
                 console.log(res.data)
+                this.$router.push({name:'board'})
             })
         }
     },

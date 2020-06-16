@@ -16,6 +16,7 @@
       v-for="(article, index) in articles" :key="article.id"
       :article="article"
       :index="index"
+      @delete-index-data='deleteArticle'
     /> 
   </tbody>
 </table>
@@ -44,6 +45,21 @@ export default {
           this.articles = res.data
         })
     },
+    methods:{
+      deleteArticle(indexdata){
+        const config={
+                headers:{
+                Authorization: `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
+           axios.post('http://localhost:8000/reviews/delete/'+indexdata[0]+'/', null, config )
+           .then(res=> {
+               console.log(res)
+               this.$router.push({name:'board'})
+           })
+           this.articles.splice(indexdata[1],1)
+      }
+    }
 
 }
 </script>
