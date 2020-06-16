@@ -6,13 +6,21 @@
       <button @click="up();receive()"> next</button>
     </div>
   <!-- 여기부터 장르 라디오 버튼 ?  -->
+
+  <div class="col-lg-12">
+
     <div class="form-check form-check-inline" v-for="genre in genres" :key='genre.name' @change="sendgenre">
+
       <input class="form-check-input" type="checkbox" name="exampleRadios" :id="genre.name" :value="genre.id" v-model="selectg" >
       <label class="form-check-label" :for="genre.name">
         {{genre.name}}
       </label>
     </div>
-      <!-- <button type='submit' @click="sendgenre"> 제출 </button> -->
+
+      <button type='submit' @click="sendgenre"> 제출 </button>
+  </div>
+
+
     <br>
 
 
