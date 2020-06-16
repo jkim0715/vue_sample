@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       isLoggedIn: false, 
+      username_tmp:null
     }
   },
   created(){
@@ -40,10 +41,12 @@ export default {
       this.isLoggedIn = true
     },
     login(loginData) {
-      console.log(loginData)
+      // console.log(loginData)
       axios.post('http://localhost:8000/rest-auth/login/', loginData)
         .then(res => {
           this.setCookie(res.data.key)
+          this.$cookies.set('username',loginData.username)
+          // console.log(loginData.username)
           this.$router.push({ name: 'boxoffice'})
         })
         .catch(err => {
@@ -54,6 +57,8 @@ export default {
       axios.post(SERVER_URL + '/rest-auth/signup/',signupData)
       .then(res=> {
         this.setCookie(res.data.key)
+        // console.log(signupData.username)
+        this.$cookies.set('username',signupData.username)
         this.$router.push({name:'boxoffice'})
       })
       .catch(err=>console.log(err.response.data))
@@ -67,6 +72,7 @@ export default {
       axios.post(SERVER_URL + '/rest-auth/logout/', null, requestHeaders)
         .then(() => {
           this.$cookies.remove('auth-token')
+          this.$cookies.remove('username')
           this.isLoggedIn = false
           this.$router.push({ name: 'boxoffice'})
         })
