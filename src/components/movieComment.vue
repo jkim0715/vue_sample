@@ -54,6 +54,7 @@ export default {
             this.commentData.rate = 0
         })
         },
+
         deleteComment(commentId){
             this.$emit('delete-comment',commentId)
             // const config = {
@@ -63,6 +64,8 @@ export default {
             // } 
             // axios.post(`http://localhost:8000/movies/deletemoviecomment/${commentId}/`, null, config)
         },
+
+       
     }
    
         
