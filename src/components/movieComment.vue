@@ -4,7 +4,7 @@
       <li v-for="comment in comments" :key="comment.id">
           {{comment.title}} 
           {{comment.rate}}점
-        <button v-show="comment.user.username===user">삭제</button>
+        <button v-if="comment.user.username===user">삭제</button>
       </li>
       <div>
       <!-- <button @click="down(); receive()">이전 페이지</button>
@@ -49,7 +49,7 @@ export default {
                 movie:this.movie_id,
                 rate: this.commentData.rate,
                 title: this.commentData.title,
-                user: null
+                user: {username:this.user}
             })
             this.commentData.title =null
             this.commentData.rate = 0
@@ -58,7 +58,7 @@ export default {
 
         },
         delete(){
-            
+
         }
         
     }
