@@ -6,15 +6,21 @@
       <button @click="up();receive()"> next</button>
     </div>
   <!-- 여기부터 장르 라디오 버튼 ?  -->
+
   <div class="col-lg-12">
-    <div class="form-check form-check-inline" v-for="genre in genres" :key='genre.name'>
+
+    <div class="form-check form-check-inline" v-for="genre in genres" :key='genre.name' @change="sendgenre">
+
       <input class="form-check-input" type="checkbox" name="exampleRadios" :id="genre.name" :value="genre.id" v-model="selectg" >
       <label class="form-check-label" :for="genre.name">
         {{genre.name}}
       </label>
     </div>
+
       <button type='submit' @click="sendgenre"> 제출 </button>
   </div>
+
+
     <br>
 
 
@@ -66,16 +72,18 @@ export default {
         this.page = (this.page)*1-1
       },
       sendgenre(){
+        if (this.selectg.length===0) {
+          this.receive()
+        } else {
+          axios.get(SERVER_URL+'searchmovies/genres',{params: this.selectg})
 
+          .then(res => {console.log(res)
+          this.movies = res.data
+          })
+          .catch(err => console.log(err.response.data))
+        }
 
-        // console.log(SERVER_URL+'searchmovies/genres',this.selectg)
-
-        axios.get(SERVER_URL+'searchmovies/genres',{params: this.selectg})
-
-        .then(res => {console.log(res)
-        this.movies = res.data
-        })
-        .catch(err => console.log(err.response.data))
+        
       }
     }
 }
