@@ -58,8 +58,12 @@ export default {
 
         },
         delete(){
-
-        }
+            // const config={
+            //     headers:{
+            //     Authorization: `Token ${this.$cookies.get('auth-token')}`
+            //     }
+            }
+        // }
         
     }
    

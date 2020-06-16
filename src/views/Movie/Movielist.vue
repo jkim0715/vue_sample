@@ -23,7 +23,7 @@
       </label>
     </div>
 
-      <button type='submit' @click="sendgenre"> 제출 </button>
+      <!-- <button type='submit' @click="sendgenre"> 제출 </button> -->
   </div>
 
 
@@ -98,6 +98,7 @@ export default {
             console.log(res)
             })
         },
+        
     }
 }
 </script>

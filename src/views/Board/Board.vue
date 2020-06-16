@@ -17,8 +17,10 @@
       :article="article"
       :index="index"
       @delete-index-data='deleteArticle'
+      @select-index-data='selectArticle'
     /> 
   </tbody>
+  
 </table>
   <router-link :to="{name:'articlecreate'}">글 쓰기</router-link>
   </div>
@@ -37,6 +39,7 @@ export default {
     data(){
         return {
             articles:[],
+            index:null,
         }
     },
     created(){
@@ -51,16 +54,24 @@ export default {
                 headers:{
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                 }
-            }
+                }
            axios.post('http://localhost:8000/reviews/delete/'+indexdata[0]+'/', null, config )
            .then(res=> {
                console.log(res)
                this.$router.push({name:'board'})
            })
            this.articles.splice(indexdata[1],1)
-      }
+      },
+      selectArticle(indexdata){
+        this.index = indexdata[1]
+        this.$router.push(
+          {name:'articledetail',
+          params :{article:indexdata[0]}
+          }
+        )
+      },
+      
     }
-
 }
 </script>
 

@@ -11,7 +11,7 @@
     </div>
     <div class="col-lg-3" v-for='movie in movies' :key="movie.id">
         <div class="card-body">
-            <img :src='"https://image.tmdb.org/t/p/original"+movie.poster_path' class="card-img-top" alt="대체 텍스트">
+            <img :src='"https://image.tmdb.org/t/p/original"+movie.poster_path' class="card-img-top" alt="이미지가 없습니다.">
             <h5 class="card-title">{{movie.title}}</h5>
             <p>평점: {{movie.vote_average}}</p>
             <button @click.prevent='add(movie.id)' >추가하기</button>
