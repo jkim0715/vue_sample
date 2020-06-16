@@ -8,6 +8,8 @@
       <th scope="col">제목</th>
       <th scope="col">작성자</th>
       <th scope="col">작성일</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
       <th scope="col">비고</th>
     </tr>
   </thead>
@@ -18,11 +20,14 @@
       :index="index"
       @delete-index-data='deleteArticle'
       @select-index-data='selectArticle'
+      @select-indexcomponent='selectArticleComponent'
     /> 
   </tbody>
   
 </table>
   <router-link :to="{name:'articlecreate'}">글 쓰기</router-link>
+
+  <ArticleDetail  :article='tmp'/>
   </div>
 
 
@@ -31,15 +36,17 @@
 <script>
 import axios from 'axios'
 import articleList from '@/components/board/articleList'
+import ArticleDetail from './ArticleDetail.vue'
+
 export default {
     name: 'Board',
     components:{
-      articleList
+      articleList,ArticleDetail
     },
     data(){
         return {
             articles:[],
-            index:null,
+            tmp:null
         }
     },
     created(){
@@ -63,13 +70,16 @@ export default {
            this.articles.splice(indexdata[1],1)
       },
       selectArticle(indexdata){
-        this.index = indexdata[1]
         this.$router.push(
           {name:'articledetail',
           params :{article:indexdata[0]}
           }
         )
       },
+      selectArticleComponent(indexdata){
+        console.log(typeof(indexdata),'ddd')
+        this.tmp = indexdata[0]
+      }
       
     }
 }
