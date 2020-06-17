@@ -1,18 +1,21 @@
 <template>
   <div>
       <!-- {{comments.results}} -->
-      <li v-for="comment in comments" :key="comment.id">
-          {{comment.title}} 
-          {{comment.rate}}점
-        <button v-if="comment.user.username===user" @click="deleteComment(comment.id)">삭제</button>
-      </li>
+      <p class="row" v-for="comment in comments" :key="comment.id">
+          <span class="col-md-3">{{comment.user.username}} </span>
+          <span class="col-md-3">{{comment.title}} </span>
+          <span class="col-md-3">
+                <span id=stars></span>
+              {{comment.rate}}점</span>
+        <button class="col-md-2 btn btn-danger" v-if="comment.user.username===user" @click="deleteComment(comment.id)">삭제</button>
+      </p>
       <div>
       <!-- <button @click="down(); receive()">이전 페이지</button>
       <button @click="up();receive()">다음 페이지</button> -->
       </div>
     <input v-model="commentData.title" type="text">
     <input v-model='commentData.rate' type="number" min="0" max="10">
-    <button @click="registerComment" > 등록하기 </button>
+    <button class="btn btn-primary" @click="registerComment" > 등록하기 </button>
   </div>
 </template>
 
@@ -31,7 +34,8 @@ export default {
                 title: null,
                 rate : 0
             },
-            user: this.$cookies.get('username')
+            user: this.$cookies.get('username'),
+            output:[]
         }
     },
     methods :{
@@ -57,15 +61,28 @@ export default {
 
         deleteComment(commentId){
             this.$emit('delete-comment',commentId)
-            // const config = {
-            //     headers: {
-            //     Authorization: `Token ${this.$cookies.get('auth-token')}`
-            //         }
-            // } 
-            // axios.post(`http://localhost:8000/movies/deletemoviecomment/${commentId}/`, null, config)
         },
+        getStars(rating){
+              // Round to nearest half
+                rating = Math.round(rating * 2) / 2;
+                let output = [];
 
-       
+                // Append all the filled whole stars
+                for (var i = rating; i >= 1; i--)
+                    output.push('<i class="fa fa-star" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                // If there is a half a star, append it
+                if (i == .5) output.push('<i class="fa fa-star-half-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                // Fill the empty stars
+                for (let i = (5 - rating); i >= 1; i--)
+                    output.push('<i class="fa fa-star-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+                console.log('starssssssssssssss')
+                return output.join('');
+                }       
+    },
+    created(){
+        document.getElementById("stars").innerHTML= this.getStars(this.comment.rate);
     }
    
         
@@ -74,5 +91,7 @@ export default {
 </script>
 
 <style>
-
+.checked {
+  color: orange;
+}
 </style>

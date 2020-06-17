@@ -1,9 +1,9 @@
 <template>
   <div class="card-body">
     <img :src="backdrop_URL" class="card-img-top" alt="대체 텍스트">
-    <h5 class="card-title">{{movie.title}}</h5>
+    <h5 class="card-title text-center">{{movie.title}}</h5>
     <p>평점: {{movie.vote_average}}</p>
-    <td><movieDetailfordb :movie="movie" :genres_all='genres' type="button" class= 'btn-btn-primary' /></td>
+    <p><movieDetailfordb :movie="movie" :genres_all='genres' type="button" class= 'btn-btn-secondary ' /></p>
   </div>
 </template>
 

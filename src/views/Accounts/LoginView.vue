@@ -1,7 +1,7 @@
 <template>
     <div>
       <h1>Login</h1>
-      <div class="row">
+      <div class="row justify-content-center">
       <form>
         <div class="form-group">
             <label for="username">username </label>

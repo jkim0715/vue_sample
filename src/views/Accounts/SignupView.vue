@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Signup</h1>
-        <form>
+        <form class="justify-content-center">
+            <h1>Signup</h1>
             <div class="form-group">
                 <label for="username" class="float-left">username</label>
                 <input class="form-control" v-model="signupData.username" id='username' type="text">
