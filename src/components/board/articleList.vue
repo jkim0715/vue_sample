@@ -6,7 +6,7 @@
         </td>
       <td>{{article.user.username}}</td>
       <td>{{article.created_at}}</td>
-      <td><button @click="selectarticlecomponent">바로보기</button></td>
+      <td><button @click="selectarticlecomponent">간편히 보기</button></td>
       <td><button @click="selectarticle">크게보기</button></td>
       <td v-if="article.user.username===user"><button @click='deletearticle'>삭제</button></td>
     </tr>

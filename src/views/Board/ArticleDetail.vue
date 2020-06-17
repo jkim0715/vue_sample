@@ -13,8 +13,8 @@
     <input v-model="commentData.title" type="text">
     <button @click="registerComment" > 등록하기 </button>
     <br>
-    <button class="btn btn-primary btn-lg mx-1" >수정</button>
-    <button class="btn btn-primary btn-lg" >좋아요</button>
+    <button class="btn btn-primary btn-lg mx-1" @click="selectArticle(article.id)" >수정</button>
+    <button @click="like(article.id)" type="button">좋아요</button>
 
 </div>
   
@@ -40,15 +40,7 @@ export default {
     components:{
       commentList,
     },
-    beforeUpdate(){
-      
-        axios.get('http://localhost:8000/reviews/comment/'+this.article.id+'/')
-        .then(res=> {
-            this.comments = res.data
-        })
-        .catch(err=> console.log(err.response))
 
-     },
      created(){
         axios.get('http://localhost:8000/reviews/comment/'+this.article.id+'/')
         .then(res=> {
@@ -74,6 +66,18 @@ export default {
         .catch(err => console.log(err.response.data))
 
         },
+        like(articleid){
+          this.$emit('Article-like',articleid)
+            
+
+        },
+        selectArticle(indexnum){
+        this.$router.push(
+          {name:'articleupdate',
+          params :{articleNum:indexnum}
+          }
+        )
+      },
     }
 }
 </script>

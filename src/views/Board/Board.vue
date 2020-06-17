@@ -21,27 +21,27 @@
       @delete-index-data='deleteArticle'
       @select-index-data='selectArticle'
       @select-indexcomponent='selectArticleComponent'
+      @Article-like ='likeupdate'
     /> 
   </tbody>
   
-</table>
+  </table>
+  <articlePreview  :article='tmp' @Article-like ='likeupdate'/>
   <router-link :to="{name:'articlecreate'}">글 쓰기</router-link>
 
-  <ArticleDetail  :article='tmp'/>
   </div>
-
-
 </template>
 
 <script>
 import axios from 'axios'
 import articleList from '@/components/board/articleList'
-import ArticleDetail from './ArticleDetail.vue'
+
+import articlePreview from '../../components/board/articlePreview.vue'
 
 export default {
     name: 'Board',
     components:{
-      articleList,ArticleDetail
+      articleList,articlePreview
     },
     data(){
         return {
@@ -79,6 +79,17 @@ export default {
       selectArticleComponent(indexdata){
         console.log(typeof(indexdata),'ddd')
         this.tmp = indexdata[0]
+      },
+      likeupdate(articleid){
+        console.log(articleid)
+            const config={
+                headers:{
+                Authorization: `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
+            axios.post('http://127.0.0.1:8000/reviews/reviewlike/'+articleid+'/',null,config)
+            .then(res => console.log(res))
+            .catch(err => console.log(err.response.data))
       }
       
     }
