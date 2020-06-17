@@ -1,11 +1,14 @@
 <template>
   <div>
     <div class="card">
-      <h5 class="card-header">{{comment.user.username}}</h5>
+      <div>
+      <h5 class="card-header ">{{comment.user.username}}</h5>
+      <p class='card-header'>{{comment.created_at}}</p>
+      </div>
       <div class="card-body">
         <h5 class="card-title">{{comment.title}}</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        
+        
       </div>
     </div>  
     
@@ -45,6 +48,13 @@ export default {
 }
 </script>
 
-<style>
 
+<style >
+h5{
+  text-align: left;
+  
+}
+p{
+  text-align: right;
+}
 </style>
