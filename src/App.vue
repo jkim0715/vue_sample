@@ -46,11 +46,21 @@ export default {
       this.isLoggedIn = true
     },
     login(loginData) {
-      // console.log(loginData)
+      
       axios.post('http://localhost:8000/rest-auth/login/', loginData)
         .then(res => {
           this.setCookie(res.data.key)
           this.$cookies.set('username',loginData.username)
+
+          const requestHeaders = {
+        headers: {
+          'Authorization': `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
+          axios.get(SERVER_URL+'/rest-auth/user/',requestHeaders)
+          .then(res=>{
+            this.$cookies.set('id',res.data.pk) 
+          })
           // console.log(loginData.username)
           this.$router.push({ name: 'boxoffice'})
         })
@@ -59,11 +69,22 @@ export default {
         })
     },
     signup(signupData){
+      
       axios.post(SERVER_URL + '/rest-auth/signup/',signupData)
       .then(res=> {
         this.setCookie(res.data.key)
-        // console.log(signupData.username)
+        console.log(res.data)
+
         this.$cookies.set('username',signupData.username)
+        const requestHeaders = {
+        headers: {
+          'Authorization': `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
+        axios.get(SERVER_URL+'/rest-auth/user/',requestHeaders)
+          .then(res=>{
+            this.$cookies.set('id',res.data.pk) 
+          })
         this.$router.push({name:'boxoffice'})
       })
       .catch(err=>console.log(err.response.data))
@@ -74,6 +95,7 @@ export default {
           'Authorization': `Token ${this.$cookies.get('auth-token')}`
         }
       }
+      
       axios.post(SERVER_URL + '/rest-auth/logout/', null, requestHeaders)
         .then(() => {
           this.$cookies.remove('auth-token')
