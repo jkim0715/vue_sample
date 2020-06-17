@@ -17,7 +17,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img :src='backdrop_URL' class="card-img-top" alt="서버 로딩중 ">
+                    <img v-if="this.movie.poster_path == null" src="@/assets/Alter_Image.jpeg" class="card-img-top" >
+                    <img v-else :src="backdrop_URL" class="card-img-top" >
                     <hr>
                     <button v-for="genre in movie.genres" :key="genre">{{genres[`${genre}`]}}</button>
                     <br>
