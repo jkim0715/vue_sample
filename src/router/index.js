@@ -13,6 +13,7 @@ import CheckBoxoffice from '@/views/Movie/CheckBoxoffice.vue'
 import Board from '@/views/Board/Board.vue'
 import ArticleCreate from '@/views/Board/ArticleCreate.vue'
 import articleDetail from '@/views/Board/ArticleDetail.vue'
+import ArticleUpdate from '@/views/Board/ArticleUpdate.vue'
 
 import admin from '@/views/Admin/Admin.vue'
 
@@ -70,6 +71,12 @@ Vue.use(VueRouter)
     component : ArticleCreate
   },
   {
+    path : '/articleupdate',
+    name: 'articleupdate',
+    component : ArticleUpdate,
+    props: true
+  },
+  {
     path : '/articledetail',
     name: 'articledetail',
     component : articleDetail,
@@ -79,6 +86,7 @@ Vue.use(VueRouter)
     path: '/admin',
     name: 'admin',
     component : admin
+    
   }
 
 ]

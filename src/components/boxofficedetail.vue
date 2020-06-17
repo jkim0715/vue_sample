@@ -1,7 +1,10 @@
 <template>
   
   <div class="card" >
-    <img :src="poster_URL" class="card-img-top" alt="로딩중">
+    
+    <img v-if="this.movie.poster_path == null" src="@/assets/Alter_Image.jpeg" class="card-img-top" >
+    <img v-else :src="poster_URL" class="card-img-top" >
+
     <div class="card-body">
       <p class="card-text">{{movie.overview}}</p>
   </div>
@@ -9,7 +12,7 @@
 </template>
 
 <script>
-
+// import vuev from '../../public/Alter_image.jpeg'
 export default {
     name: 'boxofficedetail',
 
