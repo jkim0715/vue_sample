@@ -37,7 +37,11 @@ export default {
                 this.movies = res.data
                 // console.log(this.box.movieNm)
             })
-            .catch(err=> console.log(err.response.data)) 
+            .catch(err=> {console.log(err.response.data)
+            this.movies.poster_path=null
+            this.movies.overview='데이터가 없습니다.'
+
+            }) 
     }
   }
 }

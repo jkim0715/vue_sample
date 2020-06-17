@@ -7,7 +7,7 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">{{comment.title}}</h5>
-        
+        <button v-if="this.user==comment.user.username" @click="delete_info(comment.id)">삭제</button>
         
       </div>
     </div>  
@@ -43,13 +43,18 @@ export default {
       comment:Object,
       id:Number
     },
+    methods:{
+      delete_info(commentId){
+        this.$emit('deletecomment',commentId)
+      }
+    }
     
 
 }
 </script>
 
 
-<style >
+<style scoped>
 h5{
   text-align: left;
   
