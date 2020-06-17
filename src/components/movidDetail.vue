@@ -17,7 +17,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img v-if="this.movie.poster_path == null" src="@/assets/Alter_Image.jpeg" class="card-img-top" >
+                    <img v-if="this.movie.backdrop_path == null" src="@/assets/Alter_Image.jpeg" class="card-img-top" >
                     <img v-else :src="backdrop_URL" class="card-img-top" >
                     <hr>
                     <button v-for="genre in movie.genres" :key="genre">{{genres[`${genre}`]}}</button>
@@ -59,16 +59,17 @@ export default {
     props:{
         box:Object,
     },
+
     computed:{
       backdrop_URL(){
         const IMGURL='https://image.tmdb.org/t/p/original'
         return IMGURL+this.movie.backdrop_path
       },
       movieID_1(){
-          return `#Modal${this.movie.id}`
+          return `#Modal${this.box.rnum}`
       },
       movieID_2(){
-          return `Modal${this.movie.id}`
+          return `Modal${this.box.rnum}`
       },
       Commenturl(){
           return `http://127.0.0.1:8000/movies/moviecomment/${this.movie.id}/`
