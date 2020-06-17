@@ -4,8 +4,8 @@
     <h2 class="display-4">{{article.title}}</h2>
     <p class="lead">작성자 : {{article.user.username}}</p>
     <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    
+    <p>{{article.content}}</p>
+    <h3>댓글 목록</h3>
     <commentList v-for='comment in comments' 
     :key='comment.id'
     :comment='comment'
