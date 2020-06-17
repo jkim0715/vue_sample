@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="recommend1">진수의 추천</button>
+    <button @click="recommend1">재영이의 5픽</button>
     <div v-if="movies.length !==0 " class="row justify-content-center">
       <div class='card col-lg-2'  v-for='movie in movies' :key="movie.id">
         <movieListDetail :movie='movie' />

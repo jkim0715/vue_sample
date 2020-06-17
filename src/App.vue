@@ -1,17 +1,62 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link v-if="!isLoggedIn" :to="{name:'login'}">Login</router-link> |
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          
+          <li class="nav-item ">
+            <img src="@/assets/logo.png" width="40" height="40" alt="" loading="lazy">
+          </li>
+
+          <li class="nav-item ">
+            <router-link to="/" class="nav-link">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link v-if="!isLoggedIn" :to="{name:'login'}" class="nav-link">Login</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link v-if="isLoggedIn" @click.native= "logout" to="/" class="nav-link">Logout </router-link> 
+          </li>
+          <li class="nav-item">
+            <router-link v-if="!isLoggedIn" :to="{name:'signup'}" class="nav-link">signup</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{name:'detail'}" class="nav-link">detail</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{name:'movielist'}" class="nav-link">movielist</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{name:'boxoffice'}" class="nav-link">boxoffice</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{name:'board'}" class="nav-link">board</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{name:'recommend'}" class="nav-link">recommend</router-link>
+          </li>
+
+        </ul>
+      </div>
+
+    </nav>
+
+
+    <!-- <div id="nav">
+      <router-link to="/" class="nav-link">Home</router-link>
+      <router-link v-if="!isLoggedIn" :to="{name:'login'}">Login</router-link>
       <router-link v-if="isLoggedIn" @click.native= "logout" to="/" >Logout </router-link> 
-      <router-link v-if="!isLoggedIn" :to="{name:'signup'}">signup</router-link> |
-      <router-link :to="{name:'detail'}">detail</router-link> |
-      <router-link :to="{name:'movielist'}">movielist</router-link> |
-      <router-link :to="{name:'boxoffice'}">boxoffice</router-link> |
-      <router-link :to="{name:'board'}">board</router-link> |
-      <router-link :to="{name:'recommend'}">recommend</router-link> |
-      <!-- <router-link :to="{name:'admin'}">admin</router-link> | -->
-    </div>
+      <router-link v-if="!isLoggedIn" :to="{name:'signup'}">signup</router-link>
+      <router-link :to="{name:'detail'}">detail</router-link>
+      <router-link :to="{name:'movielist'}">movielist</router-link>
+      <router-link :to="{name:'boxoffice'}">boxoffice</router-link>
+      <router-link :to="{name:'board'}">board</router-link>
+      <router-link :to="{name:'recommend'}">recommend</router-link>
+      <router-link :to="{name:'admin'}">admin</router-link> 
+     </div> -->
     <div class="container">
     <router-view @submit-login-data='login' @submit-signup-data='signup' />
     </div>
@@ -115,6 +160,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: darkgrey;
 }
 
 #nav {
