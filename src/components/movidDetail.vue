@@ -1,8 +1,10 @@
 <template>
   <div>
+     <p>
      <button @click="movieDetail()"  type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
         영화정보 상세보기
     </button>
+    </p> 
 
         <!-- Modal -->
     <div class="modal fade" :id="movieID_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

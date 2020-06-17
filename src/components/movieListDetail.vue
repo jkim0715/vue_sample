@@ -1,11 +1,13 @@
 <template>
   <div class="card-body">
+
     
     <img v-if="this.movie.poster_path == null" src="@/assets/Alter_Image.jpeg" class="card-img-top" >
     <img v-else :src="backdrop_URL" class="card-img-top" >
     <h5 class="card-title">{{movie.title}}</h5>
+
     <p>평점: {{movie.vote_average}}</p>
-    <td><movieDetailfordb :movie="movie" :genres_all='genres' type="button" class= 'btn-btn-primary' /></td>
+    <p><movieDetailfordb :movie="movie" :genres_all='genres' type="button" class= 'btn-btn-secondary ' /></p>
   </div>
 </template>
 

@@ -43,7 +43,15 @@ Vue.use(VueRouter)
   {
     path: '/accounts/detail',
     name: 'detail',
-    component : AccountDetail
+    component : AccountDetail,
+    beforeEnter: (to, from, next) => {
+      //1. 토큰값을 가지고 있는가?
+      if(!Vue.$cookies.isKey('auth-token')){
+        next('/accounts/login')
+      }else{
+        next()
+      }
+    }
   },
   {
     path : '/movielist',
@@ -53,7 +61,15 @@ Vue.use(VueRouter)
   {
     path : '/movierecommendation',
     name : 'recommend',
-    component : MovieRecommend
+    component : MovieRecommend,
+    beforeEnter: (to, from, next) => {
+      //1. 토큰값을 가지고 있는가?
+      if(!Vue.$cookies.isKey('auth-token')){
+        next('/accounts/login')
+      }else{
+        next()
+      }
+    }
   },
   {
     path : '/checkboxoffice',
