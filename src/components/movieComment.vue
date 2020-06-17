@@ -5,7 +5,6 @@
           <span class="col-md-3">{{comment.user.username}} </span>
           <span class="col-md-3">{{comment.title}} </span>
           <span class="col-md-3">
-                <span id=stars></span>
               {{comment.rate}}점</span>
         <button class="col-md-2 btn btn-danger" v-if="comment.user.username===user" @click="deleteComment(comment.id)">삭제</button>
       </p>
@@ -35,7 +34,8 @@ export default {
                 rate : 0
             },
             user: this.$cookies.get('username'),
-            output:[]
+            output:[],
+
         }
     },
     methods :{
@@ -60,32 +60,13 @@ export default {
             this.commentData.rate = 0
         })
         },
+     computed : {
 
+    },
         deleteComment(commentId){
             this.$emit('delete-comment',commentId)
         },
-        getStars(rating){
-              // Round to nearest half
-                rating = Math.round(rating * 2) / 2;
-                let output = [];
-
-                // Append all the filled whole stars
-                for (var i = rating; i >= 1; i--)
-                    output.push('<i class="fa fa-star" aria-hidden="true" style="color: gold;"></i>&nbsp;');
-
-                // If there is a half a star, append it
-                if (i == .5) output.push('<i class="fa fa-star-half-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
-
-                // Fill the empty stars
-                for (let i = (5 - rating); i >= 1; i--)
-                    output.push('<i class="fa fa-star-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
-                console.log('starssssssssssssss')
-                return output.join('');
-                }       
     },
-    created(){
-        document.getElementById("stars").innerHTML= this.getStars(this.comment.rate);
-    }
    
         
    
@@ -93,7 +74,5 @@ export default {
 </script>
 
 <style>
-.checked {
-  color: orange;
-}
+
 </style>
