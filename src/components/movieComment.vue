@@ -46,7 +46,8 @@ export default {
                 }
             }
         axios.post('http://127.0.0.1:8000/movies/moviecomment/'+this.movie_id+'/create',this.commentData,config)
-        .then(( )=> {
+        .then((res )=> {
+            this.$emit('createcomment',res.data.movie)
             this.comments.push({
                 id:null,
                 movie:this.movie_id,

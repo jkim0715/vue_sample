@@ -1,7 +1,7 @@
 <template>
     <div>
 
-     <button  @click="movieDetail();commentDetail();genresToString();add(movie.id)" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
+     <button  @click="movieDetail();commentDetail();genresToString();add(modalMovie.id)" type="button" class="btn btn-warning" data-toggle="modal" :data-target="movieID_1">
         영화정보 상세보기
     </button>
 
@@ -11,7 +11,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{movie.title}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{modalMovie.title}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -22,15 +22,15 @@
                     <hr>
                     <button v-for="genre in movie_db.genres" :key="genre">{{genres[`${genre}`]}}</button>
                     <br>
-                    <button type="button" class="btn btn-success">{{movie.vote_average}} </button>
+                    <button type="button" class="btn btn-success">{{modalMovie.vote_average}} </button>
                     <br>
                     <br>
-
                     {{movie.overview}}
                 </div>
-                <movieComment :comments ="comments" :movie_id="movie.id"   @delete-comment="deleteComment"/>
+                <movieComment :comments ="comments" :movie_id="modalMovie.id"   @delete-comment="deleteComment" @createcomment="createComment"/>
                 <div class="modal-footer">
                     <button @click="like" type="button">좋아요</button>
+                    <span>{{modalMovie.no_of_like_users}}명이 좋아합니다.</span>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -52,6 +52,7 @@ export default {
             movie_db : [],
             genres:{},
             comments : [],
+            modalMovie : this.movie
         }
     },
     components:{
@@ -61,7 +62,7 @@ export default {
         movie:Object,
         genres_all:Object
     },
-    computed:{
+    computed:{ 
       backdrop_URL(){
         const IMGURL='https://image.tmdb.org/t/p/original'
         return IMGURL+this.movie.backdrop_path
@@ -97,7 +98,10 @@ export default {
                 }
             }
             axios.post('http://127.0.0.1:8000/movies/like/'+this.movie.id+'/',null,config)
-            .then(res => console.log(res))
+            .then(res => {
+                this.modalMovie = res.data
+                console.log(res.data)}
+                )
             .catch(err => console.log(err.response.data))
 
         },
@@ -119,6 +123,9 @@ export default {
         .then(data=>{
             console.log(data)
         })
+        },
+        createComment(movie){
+            this.modalMovie =movie
         },
 
         deleteComment(commentId){
