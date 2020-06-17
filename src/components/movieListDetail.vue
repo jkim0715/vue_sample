@@ -1,5 +1,7 @@
 <template>
   <div class="card-body">
+
+    
     <img v-if="this.movie.poster_path == null" src="@/assets/Alter_Image.jpeg" class="card-img-top" >
     <img v-else :src="backdrop_URL" class="card-img-top" >
     <h5 class="card-title">{{movie.title}}</h5>

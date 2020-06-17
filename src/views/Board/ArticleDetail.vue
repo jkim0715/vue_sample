@@ -9,6 +9,7 @@
     <commentList v-for='comment in comments' 
     :key='comment.id'
     :comment='comment'
+    @deletecomment='deleteComment'
      />
     <input v-model="commentData.title" type="text">
     <button @click="registerComment" > 등록하기 </button>
@@ -60,10 +61,22 @@ export default {
         console.log(this.commentData,config)
         axios.post('http://127.0.0.1:8000/reviews/comment/create/'+this.article.id+'/',this.commentData, config)
         .then(res => {
-            console.log(res.data)
+            
+            // console.log(this.comments)
             this.commentData.title = null
+            
+            this.comments.push({
+              created_at:res.data.created_at,
+              id:res.data.id,
+              title:res.data.title,
+              user:{
+                id:res.data.user.id,
+                username:res.data.user.username
+              }
+
+            })
         })
-        .catch(err => console.log(err.response.data))
+        .catch(err => console.log(err))
 
         },
         like(articleid){
@@ -78,6 +91,22 @@ export default {
           }
         )
       },
+      deleteComment(commentId){
+            const config = {
+                headers: {
+                Authorization: `Token ${this.$cookies.get('auth-token')}`
+                    }
+            } 
+            axios.post('http://localhost:8000/reviews/comment/delete/'+commentId+'/',null, config)
+            .then(res=>{
+                console.log(res.data)
+                axios.get('http://localhost:8000/reviews/comment/'+this.article.id+'/')
+                .then(res=> {
+                  this.comments = res.data
+                  })
+                .catch(err=> console.log(err.response))
+            })
+        },
     }
 }
 </script>

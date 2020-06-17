@@ -48,11 +48,12 @@ export default {
         axios.post('http://127.0.0.1:8000/movies/moviecomment/'+this.movie_id+'/create',this.commentData,config)
         .then((res )=> {
             this.$emit('createcomment',res.data.movie)
+            console.log(res)
             this.comments.push({
-                id:null,
+                id:res.data.id,
                 movie:this.movie_id,
-                rate: this.commentData.rate,
-                title: this.commentData.title,
+                rate: res.data.rate,
+                title: res.data.title,
                 user: {username:this.user}
             })
             this.commentData.title =null

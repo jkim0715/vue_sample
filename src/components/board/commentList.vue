@@ -1,11 +1,14 @@
 <template>
   <div>
     <div class="card">
-      <h5 class="card-header">{{comment.user.username}}</h5>
+      <div>
+      <h5 class="card-header ">{{comment.user.username}}</h5>
+      <p class='card-header'>{{comment.created_at}}</p>
+      </div>
       <div class="card-body">
         <h5 class="card-title">{{comment.title}}</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <button v-if="this.user==comment.user.username" @click="delete_info(comment.id)">삭제</button>
+        
       </div>
     </div>  
     
@@ -40,11 +43,23 @@ export default {
       comment:Object,
       id:Number
     },
+    methods:{
+      delete_info(commentId){
+        this.$emit('deletecomment',commentId)
+      }
+    }
     
 
 }
 </script>
 
-<style>
 
+<style scoped>
+h5{
+  text-align: left;
+  
+}
+p{
+  text-align: right;
+}
 </style>
