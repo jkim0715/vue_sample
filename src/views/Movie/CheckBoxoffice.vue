@@ -18,7 +18,7 @@
             <th scope="row">{{boxoffice.rank}}</th>
             <td> {{boxoffice.movieNm}}</td>
             <td> {{boxoffice.audiAcc}}</td>
-            <td> <movieDetail :box="boxoffice" type="button" class= 'btn-btn-primary' /></td>
+            <td> <movieDetail :box="boxoffice"  type="button" class= 'btn-btn-primary' /></td>
           </tr>
         </tbody>
         </table>
