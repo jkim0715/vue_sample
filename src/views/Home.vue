@@ -1,5 +1,9 @@
 <template>
   <div class="row">
+    
+    <!-- <div id='logo' class="col-12">
+      <img src="@/assets/logo.png" alt="">
+    </div> -->
     <div class = 'col-sm-12 col-md-6'>
       boxofficetable
       <todayboxoffice @submit-box-data='save_box'/>
@@ -46,3 +50,10 @@ export default {
   }
 }
 </script>
+
+<style  scoped>
+#logo{
+  justify-content: center;
+}
+
+</style>

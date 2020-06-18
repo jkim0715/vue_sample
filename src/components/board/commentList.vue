@@ -12,17 +12,6 @@
       </div>
     </div>  
     
-
-
-<!-- 
-    <div>
-      <span>{{comment.user.username}}</span>
-      <br>
-      <hr>
-      {{comment.title}}
-      <hr>
-    </div> -->
-
     
   </div>
 </template>

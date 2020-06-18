@@ -1,8 +1,8 @@
 <template>
   <div class='row'>
     <div class="col-lg-12">
-      제목 : <input type="text" v-model="mvtitle" >
-      <button @click="send" @keyup.enter="send">검색</button>
+      제목 : <input type="text" v-model="mvtitle" @keyup.enter="startsearch();send()" >
+      <button @click="startsearch();send()" >검색</button>
     </div>
     
     
@@ -11,6 +11,7 @@
       <input type="number" v-model="page" @keypress.enter="receive">
       <button @click="up();receive()"> next</button>
     </div>
+    <div class="col-lg-12"><p>max page : {{maxPage}}</p></div>
   <!-- 여기부터 장르 라디오 버튼 ?  -->
 
   <div class="col-lg-12">
@@ -59,14 +60,43 @@ export default {
       console.log(res)})
       .catch(err=> console.log(err))
     },
-    
+    computed:{
+      maxPage(){
+        if (this.movies.total_pages == null){
+        return this.movies.count / 9
+      }else{
+        return this.movies.total_pages
+      }},
+      pages(){
+        if (this.page > this.maxPage){
+          return this.maxPage
+        } else if(this.page<0){
+          return 1
+        }
+        else
+        {
+          return this.page
+        }
+      }
+    },
     methods:{
       receive(){
-        axios.get(SERVER_URL+'?page='+this.page)
+        if(this.movies.total_pages != null){
+          this.send()
+          if (this.page > this.pages){
+          this.page=this.pages
+        }
+        }else{
+          axios.get(SERVER_URL+'?page='+this.pages)
         .then(res=> {this.movies = res.data
-          // console.log(res)
-        })
+        console.log(res)
+        if (this.page > this.pages){
+          this.page=this.pages
+        }
+      })
         .catch(err=> console.log(err))
+        }
+        
       },
       up(){
         this.page = (this.page)*1+1
@@ -88,8 +118,13 @@ export default {
 
         
       },
+      startsearch(){
+        this.page =1 
+        this.pages =1
+      },
       send(){
-            axios.get('https://api.themoviedb.org/3/search/movie?api_key=4aa6196c39a63ef5473aa8c1e096c329&language=ko-K&query='+this.mvtitle+'&page='+this.page)
+            
+            axios.get('https://api.themoviedb.org/3/search/movie?api_key=4aa6196c39a63ef5473aa8c1e096c329&language=ko-K&query='+this.mvtitle+'&page='+this.pages)
             .then(res=> {this.movies = res.data
             console.log(res)
             })
@@ -99,6 +134,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+p{
+  text-align: center;
+}
 </style>

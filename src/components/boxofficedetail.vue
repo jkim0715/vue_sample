@@ -12,7 +12,7 @@
 </template>
 
 <script>
-// import vuev from '../../public/Alter_image.jpeg'
+
 export default {
     name: 'boxofficedetail',
 
