@@ -27,6 +27,8 @@
 </template>
 
 <script>
+const SERVER_URL = 'http://127.0.0.1:8000/'
+
   import axios from 'axios'
   import movieListDetail from '../../components/movieListDetail.vue'
   export default {
@@ -46,7 +48,7 @@
             'Authorization': `Token ${this.$cookies.get('auth-token')}`
           }
         }
-        axios.get('http://localhost:8000/movies/recommend/', requestHeaders)
+        axios.get(SERVER_URL+'movies/recommend/', requestHeaders)
           .then(res => {
             this.movies = res.data
           })
@@ -55,7 +57,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .carousel .item {
   height: 300px;
 }

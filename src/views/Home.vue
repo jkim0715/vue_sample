@@ -1,14 +1,12 @@
 <template>
   <div class="row">
     
-    <!-- <div id='logo' class="col-12">
-      <img src="@/assets/logo.png" alt="">
-    </div> -->
-    <div class = 'col-sm-12 col-md-6'>
+
+    <div class = 'col-sm-12 col-md-12 col-lg-6'>
       boxofficetable
       <todayboxoffice @submit-box-data='save_box'/>
     </div>
-    <div class = 'col-sm-12 col-md-6'>
+    <div class = 'col-sm-12 col-md-12 col-lg-6'>
       상세정보 페이지
       <boxofficedetail v-if="movies" :box='boxdata' :movie='movies' />
     </div>
@@ -17,7 +15,7 @@
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/movies/searchmovie/'
+const SERVER_URL = 'http://127.0.0.1:8000/'
 import todayboxoffice from '@/components/todayboxoffice.vue'
 import boxofficedetail from '@/components/boxofficedetail.vue'
 export default {
@@ -35,7 +33,7 @@ export default {
     save_box(box){
       this.boxdata = box
       console.log(this.boxdata)
-      axios.get(SERVER_URL+this.boxdata.movieNm+'/')
+      axios.get(SERVER_URL+'movies/searchmovie/'+this.boxdata.movieNm+'/')
             .then(res=> {
                 console.log(res)
                 this.movies = res.data

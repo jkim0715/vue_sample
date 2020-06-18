@@ -6,7 +6,7 @@
     <img v-else :src="poster_URL" class="card-img-top" >
 
     <div class="card-body">
-      <p class="card-text">{{movie.overview}}</p>
+    <p class="card-text col-12">{{movie.overview}}</p>
   </div>
 </div>
 </template>

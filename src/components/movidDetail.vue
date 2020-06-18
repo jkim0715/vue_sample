@@ -41,7 +41,9 @@
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/movies/searchmovie/'
+const SERVER_URL = 'http://127.0.0.1:8000/'
+
+
 import movieComment from './movieComment.vue'
 
 export default {
@@ -72,7 +74,7 @@ export default {
           return `Modal${this.box.rnum}`
       },
       Commenturl(){
-          return `http://127.0.0.1:8000/movies/moviecomment/${this.movie.id}/`
+          return SERVER_URL+`movies/moviecomment/${this.movie.id}/`
       }
       
     },
@@ -83,11 +85,11 @@ export default {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
             }
         } 
-        axios.get(SERVER_URL+this.box.movieNm+'/')
+        axios.get(SERVER_URL+'movies/searchmovie/'+this.box.movieNm+'/')
         .then(res=> {
             console.log(res.data)
             this.movie = res.data
-            axios.get('http://127.0.0.1:8000/movies/moviecomment/'+this.movie.id+'/')
+            axios.get(SERVER_URL+'movies/moviecomment/'+this.movie.id+'/')
             .then(res=> {
             this.comments = res.data
             })
@@ -96,7 +98,7 @@ export default {
             overview:'서버에러 잡시 후에 시도해주세요'
         })
 
-        axios.get('http://localhost:8000/movies/genre/',null, config)
+        axios.get(SERVER_URL+'movies/genre/',null, config)
         .then(res=>{
             res.data.forEach(item=>{
                 this.genres[`${item.id}`] = item.name
@@ -111,7 +113,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                     }
             } 
-            axios.post('http://localhost:8000/movies/deletemoviecomment/'+commentId+'/',null, config)
+            axios.post(SERVER_URL+'movies/deletemoviecomment/'+commentId+'/',null, config)
             .then(res=>{
                 console.log(res.data)
             })

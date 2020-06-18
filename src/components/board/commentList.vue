@@ -5,9 +5,9 @@
       <h5 class="card-header ">{{comment.user.username}}</h5>
       <p class='card-header'>{{comment.created_at}}</p>
       </div>
-      <div class="card-body">
+      <div class="card-body display-flex" id='bbb'>
         <h5 class="card-title">{{comment.title}}</h5>
-        <button v-if="this.user==comment.user.username" @click="delete_info(comment.id)">삭제</button>
+        <button  v-if="this.user==comment.user.username" @click="delete_info(comment.id)">삭제</button>
         
       </div>
     </div>  
@@ -51,4 +51,5 @@ h5{
 p{
   text-align: right;
 }
+
 </style>

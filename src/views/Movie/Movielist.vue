@@ -27,7 +27,7 @@
       <!-- <button type='submit' @click="sendgenre"> 제출 </button> -->
   </div>
   
-    <div class='card col-lg-4'  v-for='movie in movies.results' :key="movie.id">
+    <div class='card col-lg-4 col-md-6'  v-for='movie in movies.results' :key="movie.id">
       <movieListDetail :movie='movie' />
     </div>
   </div>
@@ -35,7 +35,7 @@
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/movies/'
+const SERVER_URL = 'http://127.0.0.1:8000/'
 
 import movieListDetail from '../../components/movieListDetail.vue'
 
@@ -55,7 +55,7 @@ export default {
     },
     created(){
       this.receive()
-      ,axios.get(SERVER_URL+'genre/')
+      ,axios.get(SERVER_URL+'movies/genre/')
       .then(res => {this.genres = res.data
       console.log(res)})
       .catch(err=> console.log(err))
@@ -87,7 +87,7 @@ export default {
           this.page=this.pages
         }
         }else{
-          axios.get(SERVER_URL+'?page='+this.pages)
+          axios.get(SERVER_URL+'movies/?page='+this.pages)
         .then(res=> {this.movies = res.data
         console.log(res)
         if (this.page > this.pages){
@@ -108,7 +108,7 @@ export default {
         if (this.selectg.length===0) {
           this.receive()
         } else {
-          axios.get(SERVER_URL+'searchmovies/genres',{params: this.selectg})
+          axios.get(SERVER_URL+'movies/searchmovies/genres',{params: this.selectg})
 
           .then(res => {console.log(res)
           this.movies = res.data

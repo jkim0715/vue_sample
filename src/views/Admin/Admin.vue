@@ -24,6 +24,8 @@
 
 <script>
 import axios from 'axios'
+const SERVER_URL = 'http://127.0.0.1:8000/'
+
 export default {
     name: 'admin',
     data(){
@@ -53,7 +55,7 @@ export default {
             this.page = (this.page)*1-1
         },
         add(id){
-            axios.get('http://127.0.0.1:8000/movies/add_movie/'+ id )
+            axios.get(SERVER_URL+'movies/add_movie/'+ id )
             .then(res => {console.log(res)
             alert('추가 성공')
             })

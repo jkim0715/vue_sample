@@ -57,7 +57,7 @@ export default {
         .then(res=> {
             console.log(res.data.boxOfficeResult.dailyBoxOfficeList)
             this.boxoffices = res.data.boxOfficeResult.dailyBoxOfficeList
-            
+            console.log(process.env.VUE_APP_SERVER_URL)
         })
         .catch(err=>console.log(err))
     },

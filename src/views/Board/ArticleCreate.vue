@@ -17,6 +17,8 @@
 </template>
 
 <script>
+const SERVER_URL = 'http://127.0.0.1:8000/'
+
 import axios from 'axios'
 export default {
     name:'articleCreate',
@@ -35,7 +37,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                 }
             }
-            axios.post('http://localhost:8000/reviews/create/', this.article, config)
+            axios.post(SERVER_URL+'reviews/create/', this.article, config)
             .then(res=> {
                 console.log(res.data)
                 this.$router.push({name:'board'})

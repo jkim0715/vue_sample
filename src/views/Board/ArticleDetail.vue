@@ -27,6 +27,8 @@
 import commentList from '../../components/board/commentList.vue'
 import axios from 'axios'
 
+const SERVER_URL = 'http://127.0.0.1:8000/'
+
 export default {
     name:'articleDetail',
     props:['article'],
@@ -43,7 +45,7 @@ export default {
     },
 
      created(){
-        axios.get('http://localhost:8000/reviews/comment/'+this.article.id+'/')
+        axios.get(SERVER_URL+'reviews/comment/'+this.article.id+'/')
         .then(res=> {
             this.comments = res.data
         })
@@ -59,7 +61,7 @@ export default {
                 }
             }
         console.log(this.commentData,config)
-        axios.post('http://127.0.0.1:8000/reviews/comment/create/'+this.article.id+'/',this.commentData, config)
+        axios.post(SERVER_URL+'reviews/comment/create/'+this.article.id+'/',this.commentData, config)
         .then(res => {
             
             // console.log(this.comments)
@@ -97,10 +99,10 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                     }
             } 
-            axios.post('http://localhost:8000/reviews/comment/delete/'+commentId+'/',null, config)
+            axios.post(SERVER_URL+'reviews/comment/delete/'+commentId+'/',null, config)
             .then(res=>{
                 console.log(res.data)
-                axios.get('http://localhost:8000/reviews/comment/'+this.article.id+'/')
+                axios.get(SERVER_URL+'reviews/comment/'+this.article.id+'/')
                 .then(res=> {
                   this.comments = res.data
                   })

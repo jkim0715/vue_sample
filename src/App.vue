@@ -92,7 +92,7 @@ export default {
     },
     login(loginData) {
       
-      axios.post('http://localhost:8000/rest-auth/login/', loginData)
+      axios.post(SERVER_URL+'/rest-auth/login/', loginData)
         .then(res => {
           this.setCookie(res.data.key)
           this.$cookies.set('username',loginData.username)
