@@ -50,7 +50,8 @@ export default {
         page: 1,
         genres:null,
         selectg:[],
-        mvtitle:null
+        mvtitle:null,
+        
       }
     },
     created(){
@@ -87,9 +88,18 @@ export default {
           this.page=this.pages
         }
         }
-        // else if(){
+        else if(this.selectg.length != 0){
+          axios.get(this.movies.next.substring(0,this.movies.next.length-1)+this.pages)
+          .then(res=>{
+            console.log(res)
+            this.movies=res.data
+          })
 
-        // }
+          if (this.page > this.pages){
+          this.page=this.pages
+        }
+
+        }
         else{
           axios.get(process.env.VUE_APP_SERVER_URL+'movies/?page='+this.pages)
         .then(res=> {this.movies = res.data
@@ -104,6 +114,7 @@ export default {
       },
       up(){
         this.page = (this.page)*1+1
+        console.log(this.movies.next.substring(0,this.movies.next.length-1))
       },
       down(){
         this.page = (this.page)*1-1
@@ -112,10 +123,11 @@ export default {
         if (this.selectg.length===0) {
           this.receive()
         } else {
-          axios.get(process.env.VUE_APP_SERVER_URL+'movies/searchmovies/genres',{params:{ genre:this.selectg, page:this.pages}})
-          // axios.get(process.env.VUE_APP_SERVER_URL+'movies/searchmovies/genres',{params: this.selectg})
+          // axios.get(process.env.VUE_APP_SERVER_URL+'movies/searchmovies/genres',{params:{ genre:this.selectg, page:this.pages}})
+          axios.get(process.env.VUE_APP_SERVER_URL+'movies/searchmovies/genres',{params: this.selectg})
 
           .then(res => {console.log(res)
+          
           this.movies = res.data
           })
           .catch(err => console.log(err.response.data))
