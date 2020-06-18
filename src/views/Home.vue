@@ -15,7 +15,7 @@
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/'
+
 import todayboxoffice from '@/components/todayboxoffice.vue'
 import boxofficedetail from '@/components/boxofficedetail.vue'
 export default {
@@ -33,7 +33,7 @@ export default {
     save_box(box){
       this.boxdata = box
       console.log(this.boxdata)
-      axios.get(SERVER_URL+'movies/searchmovie/'+this.boxdata.movieNm+'/')
+      axios.get(process.env.VUE_APP_SERVER_URL+'movies/searchmovie/'+this.boxdata.movieNm+'/')
             .then(res=> {
                 console.log(res)
                 this.movies = res.data

@@ -44,7 +44,7 @@
 import axios from 'axios'
 import movieComment from './movieComment.vue'
 
-const SERVER_URL = 'http://127.0.0.1:8000/'
+
 export default {
     name:'movieDetailfordb',
     data(){
@@ -76,8 +76,8 @@ export default {
     },
     methods:{
         movieDetail(){
-            console.log(SERVER_URL+'movies/detail/'+this.movie.id+'/')
-            axios.get(SERVER_URL+'movies/detail/'+this.movie.id+'/')
+            console.log(process.env.VUE_APP_SERVER_URL+'movies/detail/'+this.movie.id+'/')
+            axios.get(process.env.VUE_APP_SERVER_URL+'movies/detail/'+this.movie.id+'/')
             .then(res=>{
                 this.movie_db=res.data
             })
@@ -85,7 +85,7 @@ export default {
         },
         // 코멘트 받아오는 api 
         commentDetail(){
-        axios.get(SERVER_URL+'movies/moviecomment/'+this.movie.id+'/')
+        axios.get(process.env.VUE_APP_SERVER_URL+'movies/moviecomment/'+this.movie.id+'/')
         .then(res=> {
             this.comments = res.data
         })
@@ -97,7 +97,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                 }
             }
-            axios.post(SERVER_URL+'movies/like/'+this.movie.id+'/',null,config)
+            axios.post(process.env.VUE_APP_SERVER_URL+'movies/like/'+this.movie.id+'/',null,config)
             .then(res => {
                 this.modalMovie = res.data
                 console.log(res.data)}
@@ -111,7 +111,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
             }
         } 
-        axios.get(SERVER_URL+'movies/genre/',null, config)
+        axios.get(process.env.VUE_APP_SERVER_URL+'movies/genre/',null, config)
         .then(res=>{
             console.log(res.data)
             res.data.forEach(item=>{
@@ -134,7 +134,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                     }
             } 
-            axios.post(SERVER_URL+'movies/deletemoviecomment/'+commentId+'/',null, config)
+            axios.post(process.env.VUE_APP_SERVER_URL+'movies/deletemoviecomment/'+commentId+'/',null, config)
             .then(res=>{
                 console.log(res.data)
                 this.commentDetail()
@@ -142,7 +142,7 @@ export default {
         },
 
         add(id){
-            axios.get(SERVER_URL+'movies/add_movie/'+ id )
+            axios.get(process.env.VUE_APP_SERVER_URL+'movies/add_movie/'+ id )
             .then(res => {console.log(res)
             // alert('추가 성공')
             })

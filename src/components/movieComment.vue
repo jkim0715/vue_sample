@@ -20,7 +20,6 @@
 
 <script>
 
-const SERVER_URL = 'http://127.0.0.1:8000/'
 
 import axios from 'axios'
 export default {
@@ -48,7 +47,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                 }
             }
-        axios.post(SERVER_URL+'movies/moviecomment/'+this.movie_id+'/create',this.commentData,config)
+        axios.post(process.env.VUE_APP_SERVER_URL+'movies/moviecomment/'+this.movie_id+'/create',this.commentData,config)
         .then((res )=> {
             this.$emit('createcomment',res.data.movie)
             console.log(res)

@@ -21,7 +21,7 @@
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/'
+
 export default {
     name:"ArticelUpdate",
     props:['articleNum'],
@@ -33,7 +33,7 @@ export default {
         }
     },
     created(){
-        axios.get(SERVER_URL+'reviews/detail/'+this.articleNum+'/')
+        axios.get(process.env.VUE_APP_SERVER_URL+'reviews/detail/'+this.articleNum+'/')
         .then(res => {
             console.log(res)
             this.articleData = res.data
@@ -46,7 +46,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                 }
             }
-            axios.post(SERVER_URL+'reviews/update/'+this.articleNum+'/',this.articleData,config)
+            axios.post(process.env.VUE_APP_SERVER_URL+'reviews/update/'+this.articleNum+'/',this.articleData,config)
             .then(res=> {console.log(res)
             this.$router.push({name:'board'})
             }

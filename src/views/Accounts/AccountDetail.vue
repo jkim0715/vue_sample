@@ -17,7 +17,7 @@
 </template>
 
 <script>
-const SERVER_URL = 'http://127.0.0.1:8000/'
+
 
 import movieListDetail from '../../components/movieListDetail.vue'
 import axios from 'axios'
@@ -53,7 +53,7 @@ export default {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
                 }
           } 
-      axios.post(SERVER_URL+'movies/getlikemovies/',null, config)
+      axios.post(process.env.VUE_APP_SERVER_URL+'movies/getlikemovies/',null, config)
       .then(res=>{
         this.like_movies = res.data
         this.genreCount()
@@ -74,7 +74,7 @@ export default {
           this.genre_lists_str.push(this.genre_lists[`${data[i][0]}`] + `${data[i][1]}`)
         }
       })
-      axios.get(SERVER_URL+'movies/genre/',null, config)
+      axios.get(process.env.VUE_APP_SERVER_URL+'movies/genre/',null, config)
       .then(res=>{
         res.data.forEach(item=>{
           this.genre_lists[`${item.id}`] = item.name

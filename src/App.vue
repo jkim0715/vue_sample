@@ -66,7 +66,7 @@
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://localhost:8000'
+
 
 export default {
   name: 'App',
@@ -92,7 +92,7 @@ export default {
     },
     login(loginData) {
       
-      axios.post(SERVER_URL+'/rest-auth/login/', loginData)
+      axios.post(process.env.VUE_APP_SERVER_URL+'/rest-auth/login/', loginData)
         .then(res => {
           this.setCookie(res.data.key)
           this.$cookies.set('username',loginData.username)
@@ -102,7 +102,7 @@ export default {
           'Authorization': `Token ${this.$cookies.get('auth-token')}`
         }
       }
-          axios.get(SERVER_URL+'/rest-auth/user/',requestHeaders)
+          axios.get(process.env.VUE_APP_SERVER_URL+'/rest-auth/user/',requestHeaders)
           .then(res=>{
             this.$cookies.set('id',res.data.pk) 
           })
@@ -115,7 +115,7 @@ export default {
     },
     signup(signupData){
       
-      axios.post(SERVER_URL + '/rest-auth/signup/',signupData)
+      axios.post(process.env.VUE_APP_SERVER_URL + '/rest-auth/signup/',signupData)
       .then(res=> {
         this.setCookie(res.data.key)
         console.log(res.data)
@@ -126,7 +126,7 @@ export default {
           'Authorization': `Token ${this.$cookies.get('auth-token')}`
         }
       }
-        axios.get(SERVER_URL+'/rest-auth/user/',requestHeaders)
+        axios.get(process.env.VUE_APP_SERVER_URL+'/rest-auth/user/',requestHeaders)
           .then(res=>{
             this.$cookies.set('id',res.data.pk) 
           })
@@ -141,7 +141,7 @@ export default {
         }
       }
       
-      axios.post(SERVER_URL + '/rest-auth/logout/', null, requestHeaders)
+      axios.post(process.env.VUE_APP_SERVER_URL + '/rest-auth/logout/', null, requestHeaders)
         .then(() => {
           this.$cookies.remove('auth-token')
           this.$cookies.remove('username')

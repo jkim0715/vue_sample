@@ -37,7 +37,7 @@ import axios from 'axios'
 import articleList from '@/components/board/articleList'
 
 import articlePreview from '../../components/board/articlePreview.vue'
-const SERVER_URL = 'http://127.0.0.1:8000/'
+
 export default {
     name: 'Board',
     components:{
@@ -50,7 +50,7 @@ export default {
         }
     },
     created(){
-      axios.get(SERVER_URL+'reviews/')
+      axios.get(process.env.VUE_APP_SERVER_URL+'reviews/')
         .then(res => {
           this.articles = res.data
         })
@@ -62,7 +62,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                 }
                 }
-           axios.post(SERVER_URL+'reviews/delete/'+indexdata[0]+'/', null, config )
+           axios.post(process.env.VUE_APP_SERVER_URL+'reviews/delete/'+indexdata[0]+'/', null, config )
            .then(res=> {
                console.log(res)
                this.$router.push({name:'board'})
@@ -87,7 +87,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                 }
             }
-            axios.post(SERVER_URL+ 'reviews/reviewlike/'+articleid+'/',null,config)
+            axios.post(process.env.VUE_APP_SERVER_URL+ 'reviews/reviewlike/'+articleid+'/',null,config)
             .then(res => console.log(res))
             .catch(err => console.log(err.response.data))
       }

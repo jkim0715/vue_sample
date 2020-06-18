@@ -35,7 +35,7 @@
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/'
+
 
 import movieListDetail from '../../components/movieListDetail.vue'
 
@@ -55,7 +55,7 @@ export default {
     },
     created(){
       this.receive()
-      ,axios.get(SERVER_URL+'movies/genre/')
+      ,axios.get(process.env.VUE_APP_SERVER_URL+'movies/genre/')
       .then(res => {this.genres = res.data
       console.log(res)})
       .catch(err=> console.log(err))
@@ -86,8 +86,12 @@ export default {
           if (this.page > this.pages){
           this.page=this.pages
         }
-        }else{
-          axios.get(SERVER_URL+'movies/?page='+this.pages)
+        }
+        // else if(){
+
+        // }
+        else{
+          axios.get(process.env.VUE_APP_SERVER_URL+'movies/?page='+this.pages)
         .then(res=> {this.movies = res.data
         console.log(res)
         if (this.page > this.pages){
@@ -108,7 +112,8 @@ export default {
         if (this.selectg.length===0) {
           this.receive()
         } else {
-          axios.get(SERVER_URL+'movies/searchmovies/genres',{params: this.selectg})
+          axios.get(process.env.VUE_APP_SERVER_URL+'movies/searchmovies/genres',{params:{ genre:this.selectg, page:this.pages}})
+          // axios.get(process.env.VUE_APP_SERVER_URL+'movies/searchmovies/genres',{params: this.selectg})
 
           .then(res => {console.log(res)
           this.movies = res.data
@@ -122,9 +127,10 @@ export default {
         this.page =1 
         this.pages =1
       },
+      // process.env.VUE_APP_SERVER_URL
       send(){
             
-            axios.get('https://api.themoviedb.org/3/search/movie?api_key=4aa6196c39a63ef5473aa8c1e096c329&language=ko-K&query='+this.mvtitle+'&page='+this.pages)
+            axios.get('https://api.themoviedb.org/3/search/movie?api_key='+process.env.VUE_APP_MOVIE_APIKEY+'&language=ko-K&query='+this.mvtitle+'&page='+this.pages)
             .then(res=> {this.movies = res.data
             console.log(res)
             })

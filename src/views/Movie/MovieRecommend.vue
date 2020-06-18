@@ -27,7 +27,7 @@
 </template>
 
 <script>
-const SERVER_URL = 'http://127.0.0.1:8000/'
+
 
   import axios from 'axios'
   import movieListDetail from '../../components/movieListDetail.vue'
@@ -48,7 +48,7 @@ const SERVER_URL = 'http://127.0.0.1:8000/'
             'Authorization': `Token ${this.$cookies.get('auth-token')}`
           }
         }
-        axios.get(SERVER_URL+'movies/recommend/', requestHeaders)
+        axios.get(process.env.VUE_APP_SERVER_URL+'movies/recommend/', requestHeaders)
           .then(res => {
             this.movies = res.data
           })

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-const SERVER_URL = 'http://127.0.0.1:8000/'
+
 
 import axios from 'axios'
 export default {
@@ -37,7 +37,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`
                 }
             }
-            axios.post(SERVER_URL+'reviews/create/', this.article, config)
+            axios.post(process.env.VUE_APP_SERVER_URL+'reviews/create/', this.article, config)
             .then(res=> {
                 console.log(res.data)
                 this.$router.push({name:'board'})

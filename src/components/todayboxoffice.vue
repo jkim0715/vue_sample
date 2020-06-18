@@ -35,7 +35,7 @@
 <script>
 import axios from 'axios'
 const API_URL='http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key='
-const Key = 'd93a43233a59ba9e241e833c89126e87'
+
 // &targetDt=20120101
 let today = new Date();   
 today.setDate(today.getDate()-1);
@@ -53,7 +53,7 @@ export default {
         }
     },
     created(){
-        axios.get(API_URL+Key+'&targetDt='+year+month+date)
+        axios.get(API_URL+process.env.VUE_APP_KOBIS_KEY+'&targetDt='+year+month+date)
         .then(res=> {
             console.log(res.data.boxOfficeResult.dailyBoxOfficeList)
             this.boxoffices = res.data.boxOfficeResult.dailyBoxOfficeList

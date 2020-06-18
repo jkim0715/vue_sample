@@ -24,7 +24,7 @@
 
 <script>
 import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/'
+
 
 export default {
     name: 'admin',
@@ -43,7 +43,7 @@ export default {
     },
     methods:{
         send(){
-            axios.get('https://api.themoviedb.org/3/search/movie?api_key=4aa6196c39a63ef5473aa8c1e096c329&language=ko-K&query='+this.title+'&page='+this.page)
+            axios.get('https://api.themoviedb.org/3/search/movie?'+process.env.MOVIE_APIKEY+'&language=ko-K&query='+this.title+'&page='+this.page)
             .then(res=> {this.movies = res.data.results
             console.log(res)
             })
@@ -55,7 +55,7 @@ export default {
             this.page = (this.page)*1-1
         },
         add(id){
-            axios.get(SERVER_URL+'movies/add_movie/'+ id )
+            axios.get(process.env.VUE_APP_SERVER_URL+'movies/add_movie/'+ id )
             .then(res => {console.log(res)
             alert('추가 성공')
             })

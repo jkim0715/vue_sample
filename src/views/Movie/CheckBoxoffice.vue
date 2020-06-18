@@ -33,7 +33,7 @@ import axios from 'axios'
 import movieDetail from '../../components/movidDetail.vue'
 
 const API_URL='http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key='
-const Key = 'd93a43233a59ba9e241e833c89126e87'
+
 
 
 export default {
@@ -56,7 +56,7 @@ export default {
    
     methods:{
       dateupdated(){
-      axios.get(API_URL+Key+'&targetDt='+this.computedDate)
+      axios.get(API_URL+process.env.VUE_APP_KOBIS_KEY+'&targetDt='+this.computedDate)
       .then(res=> {
           console.log(res.data.boxOfficeResult.dailyBoxOfficeList)
           this.boxoffices = res.data.boxOfficeResult.dailyBoxOfficeList
